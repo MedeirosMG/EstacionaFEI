@@ -3,9 +3,10 @@ package fei.estaciona.setor;
 public class SetorB implements Setor {
 
 	@Override
-	public int vagasDisponiveis() {
+	public int[] vagas_Disponiveis() {
 		// TODO Auto-generated method stub
-		return 0;
+		int numeros[] = {1, 3, 4};
+		return numeros;
 	}
 
 	@Override
@@ -21,9 +22,15 @@ public class SetorB implements Setor {
 	}
 
 	@Override
-	public void alterar_Disponibilidade_Vaga(boolean disponivel) {
+	public void alterar_Disponibilidade_Vaga(boolean disponivel, int id) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void inserir_Nova_Vaga() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
