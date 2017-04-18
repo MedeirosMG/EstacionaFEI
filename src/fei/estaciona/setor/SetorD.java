@@ -14,7 +14,8 @@ public class SetorD implements Setor {
 	}
 	
 	@Override
-	public int[] vagas_Disponiveis() {
+	public int[] vagas_Disponiveis() 
+	{
 		
 		int[] ids = new int[Setor.MAX];
 		int contador = 0;
@@ -31,17 +32,20 @@ public class SetorD implements Setor {
 	}
 
 	@Override
-	public void alterar_Disponibilidade_Setor(boolean disponivel) {
+	public void alterar_Disponibilidade_Setor(boolean disponivel) 
+	{
 		this.disponibilidade = disponivel;
 	}
 
 	@Override
-	public boolean Verifica_Disponibilidade_Setor() {
+	public boolean Verifica_Disponibilidade_Setor() 
+	{
 		return this.disponibilidade;
 	}
 
 	@Override
-	public void alterar_Disponibilidade_Vaga(boolean disponivel, int id) {
+	public void alterar_Disponibilidade_Vaga(boolean disponivel, int id) 
+	{
 		for (Vaga vaga : vagas) {
 			if(vaga != null)
 			{
