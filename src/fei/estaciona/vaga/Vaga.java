@@ -1,6 +1,7 @@
 package fei.estaciona.vaga;
 
-public class Vaga {
+public class Vaga 
+{
 	private static int count = 0;
 	private int id_vaga;
 	private boolean disponibilidade;
@@ -14,11 +15,13 @@ public class Vaga {
 		this.tipo = tipo;
 	}
 	
-	public int getId_vaga() {
+	public int getId_vaga() 
+	{
 		return id_vaga;
 	}
 	
-	public void setDisponibilidade(boolean disponibilidade) {
+	public void setDisponibilidade(boolean disponibilidade) 
+	{
 		this.disponibilidade = disponibilidade;
 	}
 	
