@@ -6,7 +6,7 @@ public class Vaga {
 	private boolean disponibilidade;
 	private int tipo;
 	
-	public Vaga(char setor, int tipo)
+	public Vaga(int tipo)
 	{
 		Vaga.count++;
 		this.id_vaga = Vaga.count;
