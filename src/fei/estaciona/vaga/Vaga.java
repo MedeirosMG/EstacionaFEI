@@ -1,23 +1,16 @@
 package fei.estaciona.vaga;
+import fei.estaciona.vaga.tipo.*;
 
-public class Vaga 
+public class Vaga
 {
-	private static int count = 0;
-	private int id_vaga;
 	private boolean disponibilidade;
 	private int tipo;
+	private Tipo tabela_tipo;
 	
 	public Vaga(int tipo)
 	{
-		Vaga.count++;
-		this.id_vaga = Vaga.count;
 		this.disponibilidade = true;
 		this.tipo = tipo;
-	}
-	
-	public int getId_vaga() 
-	{
-		return id_vaga;
 	}
 	
 	public void setDisponibilidade(boolean disponibilidade) 
@@ -30,8 +23,8 @@ public class Vaga
 		return this.disponibilidade;
 	}
 	
-	public int verifica_tipo()
+	public String verifica_tipo()
 	{
-		return this.tipo;
+		return this.tabela_tipo.VerificaTipo(this.tipo);
 	}
 }

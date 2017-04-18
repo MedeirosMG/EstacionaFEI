@@ -4,11 +4,12 @@ import java.util.HashMap;
 
 public class Tipo 
 {
-	private Map<Integer, String> Tipos = new HashMap<Integer, String>();
+	private Map<Integer, String> Tipos;
 	private int tipos_diferentes;
 	
 	public Tipo()
 	{
+		this.Tipos = new HashMap<Integer, String>();
 		// Criando tipo de vagas padroes
 		this.Tipos.put(1, "Aluno");
 		this.Tipos.put(2, "Professor");

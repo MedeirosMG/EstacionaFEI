@@ -25,7 +25,8 @@ public class SetorA implements Setor
 		{
 			if(vaga != null)
 			{
-				ids[contador] = vaga.getId_vaga();
+				//terminar
+				//ids[contador] = vaga.getId_vaga();
 				contador++;
 			}
 		}
@@ -51,10 +52,11 @@ public class SetorA implements Setor
 		{
 			if(vaga != null)
 			{
-				if(vaga.getId_vaga() == id)
+				//terminar
+				/*if(vaga.getId_vaga() == id)
 				{
 					vaga.setDisponibilidade(disponivel);
-				}
+				}*/
 			}
 		}
 	}
