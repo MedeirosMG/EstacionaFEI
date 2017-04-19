@@ -1,24 +1,26 @@
 package fei.estaciona.main;
 
 import fei.estaciona.setor.SetorA;
-import fei.estaciona.vaga.VagasBD;
-import fei.estaciona.vaga.tipo.Tipo;
+import fei.estaciona.setor.SetorB;
+import fei.estaciona.setor.SetorC;
 
 public class Main {
 	public static void main(String[] args)
 	{	
-		VagasBD teste = new VagasBD();
-		VagasBD teste2 = new VagasBD();
-		VagasBD teste3 = new VagasBD();
+		SetorA setor = new SetorA();
+		SetorB setorB = new SetorB();
+		SetorC setorC = new SetorC();
 		
-		teste.InsereVaga(1, 1);
-		teste2.InsereVaga(2, 2);
-		teste3.InsereVaga(3, 3);
+		setor.inserir_Nova_Vaga();
+		setorB.inserir_Nova_Vaga();
+		setorC.inserir_Nova_Vaga();
 		
-		teste.imprimeVaga(1);
-		teste.imprimeVaga(2);
-		teste.imprimeVaga(3);
-		
+		int[] vagas = setor.vagas_Disponiveis();
+		for (int i : vagas) {
+			if(i != -1)
+				System.out.println("Vaga com id: " + i);
+		}
+			
 		/*
 		Tipo tipo = new Tipo();
 		

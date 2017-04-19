@@ -4,32 +4,24 @@ import fei.estaciona.vaga.Vaga;
 
 public class SetorE implements Setor 
 {
-
-	private Vaga[] vagas;
+	private int[] id_vagas;
 	private boolean disponibilidade;
 	
 	public SetorE()
 	{
 		this.disponibilidade = true;
-		vagas = new Vaga[Setor.MAX];
+		this.id_vagas = new int[MAX];
+		
+		for (int i = 0 ; i < this.id_vagas.length ; ++i) 
+		{
+			this.id_vagas[i] = -1;
+		}
 	}
 	
 	@Override
 	public int[] vagas_Disponiveis() 
 	{
-		
-		int[] ids = new int[Setor.MAX];
-		int contador = 0;
-		
-		for (Vaga vaga : vagas) 
-		{
-			if(vaga != null)
-			{
-				ids[contador] = vaga.getId_vaga();
-				contador++;
-			}
-		}
-		return ids;
+		return this.id_vagas;
 	}
 
 	@Override
@@ -47,11 +39,13 @@ public class SetorE implements Setor
 	@Override
 	public void alterar_Disponibilidade_Vaga(boolean disponivel, int id) 
 	{
-		for (Vaga vaga : vagas) {
-			if(vaga != null)
+		for (int i  : this.id_vagas) 
+		{
+			if(i != -1)
 			{
-				if(vaga.getId_vaga() == id)
+				if(id == i)
 				{
+					Vaga vaga= Setor.banco_de_vagas.buscaVaga(id);
 					vaga.setDisponibilidade(disponivel);
 				}
 			}
@@ -63,11 +57,24 @@ public class SetorE implements Setor
 	{
 		if(Verifica_Disponibilidade_Setor() )
 		{
-			for(int i = 0 ; i < vagas.length ; i++)
+			for(int i = 0 ; i < id_vagas.length ; i++)
 			{
-				if(vagas[i] == null)
+				if(id_vagas[i] == -1)
 				{
-					vagas[i] = new Vaga(1);
+					System.out.println("Qual o tipo de vaga a ser cadastrada ?\n");
+					int valida = Setor.tipos.GetTiposDiferentes();
+					int tipoVaga = Setor.leitor.nextInt();
+					
+					if(tipoVaga <= valida)
+					{
+						int NovaVaga = Setor.banco_de_vagas.InsereVaga(tipoVaga);
+						this.id_vagas[i] = NovaVaga;
+					}
+					else
+					{
+						System.out.println("Tipo invalido");
+					}
+					
 					break;
 				}
 			}
