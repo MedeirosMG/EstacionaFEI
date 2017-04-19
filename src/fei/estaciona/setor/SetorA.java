@@ -5,32 +5,33 @@ import fei.estaciona.vaga.Vaga;
 public class SetorA implements Setor 
 {
 
-	private Vaga[] vagas;
+	private int[] id_vagas;
 	private boolean disponibilidade;
 	
 	public SetorA()
 	{
 		this.disponibilidade = true;
-		vagas = new Vaga[Setor.MAX];
+		this.id_vagas = new int[MAX];
+		
+		for (int i = 0 ; i < this.id_vagas.length ; ++i) 
+		{
+			this.id_vagas[i] = -1;
+		}
 	}
 	
 	@Override
 	public int[] vagas_Disponiveis() 
 	{
-		
-		int[] ids = new int[Setor.MAX];
+		int[] disponiveis = new int[MAX];
 		int contador = 0;
-		
-		for (Vaga vaga : vagas) 
-		{
-			if(vaga != null)
+		for (int i : id_vagas) {
+			if(i != -1)
 			{
-				//terminar
-				//ids[contador] = vaga.getId_vaga();
-				contador++;
+				disponiveis[contador] = i;
+				++contador;
 			}
 		}
-		return ids;
+		return disponiveis;
 	}
 
 	@Override
@@ -48,15 +49,14 @@ public class SetorA implements Setor
 	@Override
 	public void alterar_Disponibilidade_Vaga(boolean disponivel, int id) 
 	{
-		for (Vaga vaga : vagas) 
+		for (int i  : this.id_vagas) 
 		{
-			if(vaga != null)
+			if(i != -1)
 			{
-				//terminar
-				/*if(vaga.getId_vaga() == id)
+				if(id == i)
 				{
-					vaga.setDisponibilidade(disponivel);
-				}*/
+					
+				}
 			}
 		}
 	}

@@ -7,10 +7,11 @@ public class Vaga
 	private int tipo;
 	private Tipo tabela_tipo;
 	
-	public Vaga(int tipo)
+	public Vaga(int tipo_vaga)
 	{
 		this.disponibilidade = true;
-		this.tipo = tipo;
+		this.tipo = tipo_vaga;
+		this.tabela_tipo = new Tipo();
 	}
 	
 	public void setDisponibilidade(boolean disponibilidade) 
@@ -23,7 +24,7 @@ public class Vaga
 		return this.disponibilidade;
 	}
 	
-	public String verifica_tipo()
+	public String GetTipo()
 	{
 		return this.tabela_tipo.VerificaTipo(this.tipo);
 	}

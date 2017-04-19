@@ -7,10 +7,17 @@ import fei.estaciona.vaga.tipo.Tipo;
 public class Main {
 	public static void main(String[] args)
 	{	
-		
 		VagasBD teste = new VagasBD();
+		VagasBD teste2 = new VagasBD();
+		VagasBD teste3 = new VagasBD();
 		
-		System.out.println(teste.getTamanho());
+		teste.InsereVaga(1, 1);
+		teste2.InsereVaga(2, 2);
+		teste3.InsereVaga(3, 3);
+		
+		teste.imprimeVaga(1);
+		teste.imprimeVaga(2);
+		teste.imprimeVaga(3);
 		
 		/*
 		Tipo tipo = new Tipo();
