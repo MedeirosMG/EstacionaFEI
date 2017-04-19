@@ -5,17 +5,22 @@ import java.util.Map;
 
 import fei.estaciona.setor.Setor;
 
-public class VagasBD 
+public class VagasBD
 {
-	private Map<Integer, Vaga> Vagas;
+	private static Map<Integer, Vaga> Vagas = new HashMap<Integer, Vaga>();;
 	
-	public VagasBD()
-	{
-		Vagas = new HashMap<Integer, Vaga>();
-	}
+	public VagasBD(){}
 	
 	public void InsereVaga(int Id, int tipo)
 	{
-		
+		Vaga NovaVaga = new Vaga(tipo);
+		Vagas.put(Id, NovaVaga);
+	}
+	
+	public void imprimeVaga(int id)
+	{
+		Vaga nova = Vagas.get(id);
+		if(nova != null)
+			System.out.println(nova.GetTipo());
 	}
 }
