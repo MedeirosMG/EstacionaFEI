@@ -17,13 +17,16 @@ public class Tipo
 		this.tipos_diferentes = 3;
 	}
 	
-	public void GetTiposDiferentes()
+	public int GetTiposDiferentes()
 	{
+		System.out.println("Id          Tipo\n");
 		for (int i = 1 ; i <= this.tipos_diferentes ; ++i) 
 		{
 			if(this.Tipos.get(i) != null )
-				System.out.println("Id '" + i + "' se refere a uma vaga para " + this.Tipos.get(i));
+				System.out.println(i + "          " + this.Tipos.get(i));
 		}
+		
+		return this.tipos_diferentes;
 	}
 	
 	public String VerificaTipo(int i)

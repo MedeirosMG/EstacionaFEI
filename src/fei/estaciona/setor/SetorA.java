@@ -2,7 +2,7 @@ package fei.estaciona.setor;
 
 import fei.estaciona.vaga.Vaga;
 
-public class SetorA implements Setor 
+public class SetorA implements Setor
 {
 
 	private int[] id_vagas;
@@ -22,16 +22,7 @@ public class SetorA implements Setor
 	@Override
 	public int[] vagas_Disponiveis() 
 	{
-		int[] disponiveis = new int[MAX];
-		int contador = 0;
-		for (int i : id_vagas) {
-			if(i != -1)
-			{
-				disponiveis[contador] = i;
-				++contador;
-			}
-		}
-		return disponiveis;
+		return this.id_vagas;
 	}
 
 	@Override
@@ -55,22 +46,36 @@ public class SetorA implements Setor
 			{
 				if(id == i)
 				{
-					
+					Vaga vaga= Setor.banco_de_vagas.buscaVaga(id);
+					vaga.setDisponibilidade(disponivel);
 				}
 			}
 		}
 	}
 
 	@Override
-	public void inserir_Nova_Vaga() 
+	public void inserir_Nova_Vaga()
 	{
 		if(Verifica_Disponibilidade_Setor() )
 		{
-			for(int i = 0 ; i < vagas.length ; i++)
+			for(int i = 0 ; i < id_vagas.length ; i++)
 			{
-				if(vagas[i] == null)
+				if(id_vagas[i] == -1)
 				{
-					vagas[i] = new Vaga(1);
+					System.out.println("Qual o tipo de vaga a ser cadastrada ?\n");
+					int valida = Setor.tipos.GetTiposDiferentes();
+					int tipoVaga = Setor.leitor.nextInt();
+					
+					if(tipoVaga <= valida)
+					{
+						int NovaVaga = Setor.banco_de_vagas.InsereVaga(tipoVaga);
+						this.id_vagas[i] = NovaVaga;
+					}
+					else
+					{
+						System.out.println("Tipo invalido");
+					}
+					
 					break;
 				}
 			}
@@ -80,5 +85,4 @@ public class SetorA implements Setor
 			System.out.println("Setor indiponivel");
 		}
 	}
-
 }
