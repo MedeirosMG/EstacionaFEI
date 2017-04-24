@@ -2,6 +2,9 @@ package fei.estaciona.interfaceGrafica.Login;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import fei.estaciona.login.LoginAdmin;
+
 import java.awt.Component;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -19,6 +22,7 @@ public class Login extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private LoginAdmin credencial = new LoginAdmin();
 
 	/**
 	 * Create the panel.
@@ -50,9 +54,8 @@ public class Login extends JPanel {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{	
-				
 				String password = new String(passwordField.getPassword());
-				if(password.equals("1") && textField.getText().equals("1"))
+				if(credencial.verificaLogin(textField.getText(), password))
 				{
 					setVisible(false);
 					JOptionPane.showMessageDialog(getRootPane(), "Login realizado com sucesso, bem vindo", "Login", JOptionPane.INFORMATION_MESSAGE);

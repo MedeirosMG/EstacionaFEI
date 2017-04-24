@@ -65,24 +65,41 @@ public class JanelaPrincipal extends JFrame {
 		this.setorF.setVisible(false);
 		
 		if(setor == 'A')
+		{
 			this.setorA.setVisible(true);
+			this.setorA.preencheVagas();
+		}
 		else if(setor == 'B')
+		{
 			this.setorB.setVisible(true);
+			this.setorB.preencheVagas();
+		}
 		else if(setor == 'C')
+		{
 			this.setorC.setVisible(true);
+			this.setorC.preencheVagas();
+		}
 		else if(setor == 'D')
+		{
 			this.setorD.setVisible(true);
+			this.setorD.preencheVagas();
+		}
 		else if(setor == 'E')
+		{
 			this.setorE.setVisible(true);
+			this.setorE.preencheVagas();
+		}
 		else if(setor == 'F')
+		{
 			this.setorF.setVisible(true);
-						
+			this.setorF.preencheVagas();
+		}
 	}
 	public JanelaPrincipal() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 459);
-		
+		setLayout(null);
 		
 		Login login = new Login();
 		

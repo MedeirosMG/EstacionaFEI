@@ -1,5 +1,7 @@
 package fei.estaciona.setor;
 
+import java.util.Random;
+
 import fei.estaciona.vaga.Vaga;
 
 public class SetorA implements Setor
@@ -12,17 +14,47 @@ public class SetorA implements Setor
 	{
 		this.disponibilidade = true;
 		this.id_vagas = new int[MAX];
+		Random r = new Random();
+		int randomInt;
 		
 		for (int i = 0 ; i < this.id_vagas.length ; ++i) 
 		{
 			this.id_vagas[i] = -1;
+			randomInt = r.nextInt(3) + 1;
+			inserir_Nova_Vaga(randomInt);
 		}
 	}
 	
-	@Override
-	public int[] vagas_Disponiveis() 
+	public String[] tipoVagas()
 	{
-		return this.id_vagas;
+		String []vagas = new String[16];
+		Vaga vaga;
+		for(int i = 0 ; i < 16 ; ++i)
+		{
+			if(id_vagas[i] != -1)
+			{
+				vaga= Setor.banco_de_vagas.buscaVaga(id_vagas[i]);
+				vagas[i] = vaga.GetTipo();
+			}
+		}
+		
+		return vagas;
+	}
+	
+	@Override
+	public boolean[] vagas_Disponiveis() 
+	{
+		boolean []vagas = new boolean[16];
+		for(int i = 0 ; i < 16 ; i++)
+		{
+			Vaga vaga= Setor.banco_de_vagas.buscaVaga(i+1);
+			if(vaga.verifica_disponibilidade())
+				vagas[i] = true;
+			else
+				vagas[i] = false;
+		}
+		
+		return vagas;
 	}
 
 	@Override
@@ -54,7 +86,7 @@ public class SetorA implements Setor
 	}
 
 	@Override
-	public void inserir_Nova_Vaga()
+	public void inserir_Nova_Vaga(int tipoVaga)
 	{
 		if(Verifica_Disponibilidade_Setor() )
 		{
@@ -62,27 +94,11 @@ public class SetorA implements Setor
 			{
 				if(id_vagas[i] == -1)
 				{
-					System.out.println("Qual o tipo de vaga a ser cadastrada ?\n");
-					int valida = Setor.tipos.GetTiposDiferentes();
-					int tipoVaga = Setor.leitor.nextInt();
-					
-					if(tipoVaga <= valida)
-					{
-						int NovaVaga = Setor.banco_de_vagas.InsereVaga(tipoVaga);
-						this.id_vagas[i] = NovaVaga;
-					}
-					else
-					{
-						System.out.println("Tipo invalido");
-					}
-					
-					break;
+					int NovaVaga = Setor.banco_de_vagas.InsereVaga(tipoVaga);
+					System.out.println(NovaVaga);
+					this.id_vagas[i] = NovaVaga;
 				}
 			}
-		}
-		else
-		{
-			System.out.println("Setor indiponivel");
 		}
 	}
 }
