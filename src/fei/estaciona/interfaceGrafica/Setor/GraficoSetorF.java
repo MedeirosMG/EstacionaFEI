@@ -7,6 +7,9 @@ import java.awt.Cursor;
 import javax.swing.JProgressBar;
 import java.awt.Component;
 import javax.swing.border.EmptyBorder;
+
+import fei.estaciona.setor.SetorF;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -20,6 +23,25 @@ public class GraficoSetorF extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private SetorF setor = new SetorF();
+	private JPanel[] paineis = new JPanel[16];
+	private JProgressBar progressBar = new JProgressBar();
+
+	public void preencheVagas()
+	{
+		boolean[] vagas = setor.vagas_Disponiveis();
+		int progress = 0;
+		for(int i = 0 ; i < 16 ; i++)
+		{
+			++progress;
+			if(false)
+			{
+				paineis[i].setBackground(Color.green);
+			}
+		}
+		progress = (progress*100)/16;
+		progressBar.setValue(progress);
+	}
 
 	/**
 	 * Create the panel.
@@ -33,50 +55,78 @@ public class GraficoSetorF extends JPanel {
 		setBackground(Color.LIGHT_GRAY);
 		setLayout(null);
 		
-		JPanel vaga1 = new JPanel();
-		vaga1.setBounds(10, 196, 49, 23);
-		vaga1.setBackground(Color.LIGHT_GRAY);
-		add(vaga1);
+		// ------------------ CRIACAO DAS VAGAS ---------------------- 
+		for(int i = 0 ; i< 16 ; i++)
+		{
+			paineis[i] = new JPanel();
+			paineis[i].setBackground(Color.LIGHT_GRAY);
+			add(paineis[i]);
+			switch(i)
+			{
+				case 0:
+					paineis[i].setBounds(10, 196, 49, 23);
+					break;
+				case 1:
+					paineis[i].setBounds(10, 246, 49, 23);
+					break;
+				case 2:
+					paineis[i].setBounds(10, 296, 49, 23);
+					break;
+				case 3:
+					paineis[i].setBounds(10, 347, 49, 23);
+					break;
+				case 4:
+					paineis[i].setBounds(217, 196, 49, 23);
+					break;
+				case 5:
+					paineis[i].setBounds(217, 246, 49, 23);
+					break;
+				case 6:
+					paineis[i].setBounds(217, 296, 49, 23);
+					break;
+				case 7:
+					paineis[i].setBounds(217, 347, 49, 23);
+					break;
+				case 8:
+					paineis[i].setBounds(288, 196, 49, 23);
+					break;
+				case 9:
+					paineis[i].setBounds(288, 246, 49, 23);
+					break;
+				case 10:
+					paineis[i].setBounds(288, 296, 49, 23);
+					break;
+				case 11:
+					paineis[i].setBounds(288, 347, 49, 23);
+					break;
+				case 12:
+					paineis[i].setBounds(491, 196, 49, 23);
+					break;
+				case 13:
+					paineis[i].setBounds(491, 246, 49, 23);
+					break;
+				case 14:
+					paineis[i].setBounds(491, 296, 49, 23);
+					break;
+				case 15:
+					paineis[i].setBounds(491, 347, 49, 23);
+					break;
+					
+			}
+		}
 		
-		JPanel vaga3 = new JPanel();
-		vaga3.setBounds(10, 296, 49, 23);
-		vaga3.setBackground(Color.LIGHT_GRAY);
-		add(vaga3);
+		// ---------------------- Elementos layout -------------------------------
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBounds(0, 330, 85, 1);
 		panel_5.setBackground(Color.BLACK);
 		add(panel_5);
 		
-		JPanel vaga2 = new JPanel();
-		vaga2.setBounds(10, 246, 49, 23);
-		vaga2.setBackground(Color.LIGHT_GRAY);
-		add(vaga2);
-		
-		JPanel vaga4 = new JPanel();
-		vaga4.setBounds(10, 347, 49, 23);
-		vaga4.setBackground(Color.LIGHT_GRAY);
-		add(vaga4);
-		
-		JPanel vaga16 = new JPanel();
-		vaga16.setBounds(491, 347, 49, 23);
-		vaga16.setBackground(Color.LIGHT_GRAY);
-		add(vaga16);
-		
-		JPanel vaga15 = new JPanel();
-		vaga15.setBounds(491, 296, 49, 23);
-		vaga15.setBackground(Color.LIGHT_GRAY);
-		add(vaga15);
-		
-		JPanel vaga14 = new JPanel();
-		vaga14.setBounds(491, 246, 49, 23);
-		vaga14.setBackground(Color.LIGHT_GRAY);
-		add(vaga14);
-		
-		JPanel vaga13 = new JPanel();
-		vaga13.setBounds(491, 196, 49, 23);
-		vaga13.setBackground(Color.LIGHT_GRAY);
-		add(vaga13);
+		JCheckBox checkVaga14 = new JCheckBox("New check box");
+		checkVaga14.setBackground(Color.LIGHT_GRAY);
+		checkVaga14.setBounds(465, 246, 22, 23);
+		checkVaga14.setEnabled(false);
+		add(checkVaga14);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(0, 280, 85, 1);
@@ -113,11 +163,6 @@ public class GraficoSetorF extends JPanel {
 		panel_12.setBackground(Color.BLACK);
 		add(panel_12);
 		
-		JPanel vaga12 = new JPanel();
-		vaga12.setBounds(288, 347, 49, 23);
-		vaga12.setBackground(Color.LIGHT_GRAY);
-		add(vaga12);
-		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBounds(195, 180, 167, 1);
 		panel_4.setBackground(new Color(0, 0, 0));
@@ -142,49 +187,6 @@ public class GraficoSetorF extends JPanel {
 		panel_21.setBounds(276, 180, 2, 201);
 		panel_21.setBackground(new Color(0, 0, 0));
 		add(panel_21);
-		
-		JPanel vaga8 = new JPanel();
-		vaga8.setBounds(217, 347, 49, 23);
-		vaga8.setBackground(Color.LIGHT_GRAY);
-		add(vaga8);
-		
-		JPanel vaga11 = new JPanel();
-		vaga11.setBounds(288, 296, 49, 23);
-		vaga11.setBackground(Color.LIGHT_GRAY);
-		add(vaga11);
-		
-		JPanel vaga7 = new JPanel();
-		vaga7.setBounds(217, 296, 49, 23);
-		vaga7.setBackground(Color.LIGHT_GRAY);
-		add(vaga7);
-		
-		JPanel vaga6 = new JPanel();
-		vaga6.setBounds(217, 246, 49, 23);
-		vaga6.setBackground(Color.LIGHT_GRAY);
-		add(vaga6);
-		
-		JPanel vaga5 = new JPanel();
-		vaga5.setBounds(217, 196, 49, 23);
-		vaga5.setBackground(Color.LIGHT_GRAY);
-		add(vaga5);
-		
-		JPanel vaga9 = new JPanel();
-		vaga9.setBounds(288, 196, 49, 23);
-		vaga9.setBackground(Color.LIGHT_GRAY);
-		add(vaga9);
-		
-		JPanel vaga10 = new JPanel();
-		vaga10.setBounds(288, 246, 49, 23);
-		vaga10.setBackground(Color.LIGHT_GRAY);
-		add(vaga10);
-		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setStringPainted(true);
-		progressBar.setName("");
-		progressBar.setForeground(new Color(0, 128, 0));
-		progressBar.setValue(50);
-		progressBar.setBounds(268, 11, 272, 14);
-		add(progressBar);
 		
 		JPanel panelFiltro = new JPanel();
 		panelFiltro.setBounds(20, 54, 249, 79);
@@ -305,12 +307,6 @@ public class GraficoSetorF extends JPanel {
 		checkVaga13.setEnabled(false);
 		add(checkVaga13);
 		
-		JCheckBox checkVaga14 = new JCheckBox("New check box");
-		checkVaga14.setBackground(Color.LIGHT_GRAY);
-		checkVaga14.setBounds(465, 246, 22, 23);
-		checkVaga14.setEnabled(false);
-		add(checkVaga14);
-		
 		JCheckBox checkVaga15 = new JCheckBox("New check box");
 		checkVaga15.setBackground(Color.LIGHT_GRAY);
 		checkVaga15.setBounds(465, 296, 22, 23);
@@ -337,5 +333,12 @@ public class GraficoSetorF extends JPanel {
 		lblDisponibilidade.setBounds(157, 9, 104, 14);
 		add(lblDisponibilidade);
 		
+		// Carregamento das vagas e progressbar		
+		progressBar.setStringPainted(true);
+		progressBar.setName("");
+		progressBar.setForeground(new Color(0, 128, 0));
+		progressBar.setBounds(268, 11, 272, 14);
+		add(progressBar);
+		preencheVagas();
 	}
 }

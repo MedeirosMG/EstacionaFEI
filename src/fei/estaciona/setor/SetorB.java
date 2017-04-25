@@ -20,9 +20,10 @@ public class SetorB implements Setor
 	}
 	
 	@Override
-	public int[] vagas_Disponiveis() 
+	public boolean[] vagas_Disponiveis() 
 	{
-		return this.id_vagas;
+		boolean []novo = {true, false};
+		return novo;
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class SetorB implements Setor
 	}
 
 	@Override
-	public void inserir_Nova_Vaga() 
+	public void inserir_Nova_Vaga(int tipoVaga) 
 	{
 		if(Verifica_Disponibilidade_Setor() )
 		{
@@ -64,7 +65,7 @@ public class SetorB implements Setor
 				{
 					System.out.println("Qual o tipo de vaga a ser cadastrada ?\n");
 					int valida = Setor.tipos.GetTiposDiferentes();
-					int tipoVaga = Setor.leitor.nextInt();
+					//int tipoVaga = Setor.leitor.nextInt();
 					
 					if(tipoVaga <= valida)
 					{
