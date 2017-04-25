@@ -35,9 +35,9 @@ public class GraficoSetorA extends JPanel {
 		int progress = 0;
 		for(int i = 0 ; i < 16 ; i++)
 		{
-			++progress;
 			if(vagas[i])
 			{
+				++progress;
 				paineis[i].setBackground(Color.green);
 			}
 			else
@@ -303,6 +303,7 @@ public class GraficoSetorA extends JPanel {
 								setor.alterar_Disponibilidade_Vaga(false, i+1);
 							}
 							
+							preencheVagas();
 							botaoPreencher.setVisible(false);
 							btnAdcionarVagas.setVisible(true);
 							btnRemoverVagas.setVisible(true);

@@ -95,7 +95,7 @@ public class JanelaPrincipal extends JFrame {
 			this.setorF.preencheVagas();
 		}
 	}
-	public JanelaPrincipal() {
+	public JanelaPrincipal()  {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 459);
@@ -238,7 +238,6 @@ public class JanelaPrincipal extends JFrame {
 		getContentPane().add(login);
 		login.setVisible(true);
 		login.setSize(getContentPane().getMaximumSize());
-		
 	}
 }
 
