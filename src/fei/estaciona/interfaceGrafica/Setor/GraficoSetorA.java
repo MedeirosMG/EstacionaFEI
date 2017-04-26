@@ -25,31 +25,44 @@ public class GraficoSetorA extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private SetorA setor = new SetorA();
+	
 	private JPanel[] paineis = new JPanel[16];
+	private JPanel[] layout = new JPanel[30];
 	private JCheckBox[] tipos = new JCheckBox[16];
 	private JProgressBar progressBar = new JProgressBar();
+	JButton botaoPreencher = new JButton("Ok");
+	JButton btnAdcionarVagas = new JButton("Preencher vaga(s)");
+	JButton btnRemoverVagas = new JButton("Liberar vaga(s)");
 	
 	public void preencheVagas()
 	{
-		boolean[] vagas = setor.vagas_Disponiveis();
+		int[] vagas = setor.vagas_Disponiveis();
 		int progress = 0;
+		int total = 0;
 		for(int i = 0 ; i < 16 ; i++)
 		{
-			if(vagas[i])
+			if(vagas[i] != -1)
 			{
-				++progress;
-				paineis[i].setBackground(Color.green);
+				++total;
+				if(vagas[i] == 1)
+				{
+					++progress;
+					paineis[i].setBackground(Color.green);
+				}
+				else
+				{
+					paineis[i].setBackground(Color.red);
+				}
 			}
-			else
-				paineis[i].setBackground(Color.red);
 		}
-		progress = (progress*100)/16;
+		progress = (progress*100)/total;
 		progressBar.setValue(progress);
 	}
 	/**
 	 * Create the panel.
 	 */
 	public GraficoSetorA() {
+		
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -181,72 +194,58 @@ public class GraficoSetorA extends JPanel {
 			}
 		}
 		
-		// ---------------------- Elementos layout -------------------------------
+		// ---------------------- Criação do layout -------------------------------
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(0, 330, 85, 1);
-		panel_5.setBackground(Color.BLACK);
-		add(panel_5);
+		for(int i = 0 ; i< 13 ; i++)
+		{
+			layout[i] = new JPanel();
+			layout[i].setBackground(Color.BLACK);
+			add(layout[i]);
+			switch(i)
+			{
+				case 1:
+					layout[i].setBounds(0, 280, 85, 1);		
+					break;
+				case 2:
+					layout[i].setBounds(0, 230, 85, 1);
+					break;
+				case 3:
+					layout[i].setBounds(195, 180, 167, 1);
+					break;
+				case 4:
+					layout[i].setBounds(0, 330, 85, 1);
+					break;
+				case 5:
+					layout[i].setBounds(0, 180, 85, 1);
+					break;
+				case 6:
+					layout[i].setBounds(465, 330, 85, 1);
+					break;
+				case 7:
+					layout[i].setBounds(465, 280, 85, 1);
+					break;
+				case 8:
+					layout[i].setBounds(465, 230, 85, 1);
+					break;
+				case 9:
+					layout[i].setBounds(465, 180, 85, 1);
+					break;
+				case 10:
+					layout[i].setBounds(195, 230, 167, 1);
+					break;
+				case 11:
+					layout[i].setBounds(195, 330, 167, 1);
+					break;
+				case 12:
+					layout[i].setBounds(195, 280, 167, 1);
+					break;
+				case 13:
+					layout[i].setBounds(276, 180, 2, 201);
+					break;
+			}
+		}
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(0, 280, 85, 1);
-		panel_2.setBackground(Color.BLACK);
-		add(panel_2);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(0, 230, 85, 1);
-		panel_3.setBackground(Color.BLACK);
-		add(panel_3);
-		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(0, 180, 85, 1);
-		panel_6.setBackground(Color.BLACK);
-		add(panel_6);
-		
-		JPanel panel_9 = new JPanel();
-		panel_9.setBounds(465, 330, 85, 1);
-		panel_9.setBackground(Color.BLACK);
-		add(panel_9);
-		
-		JPanel panel_10 = new JPanel();
-		panel_10.setBounds(465, 280, 85, 1);
-		panel_10.setBackground(Color.BLACK);
-		add(panel_10);
-		
-		JPanel panel_11 = new JPanel();
-		panel_11.setBounds(465, 230, 85, 1);
-		panel_11.setBackground(Color.BLACK);
-		add(panel_11);
-		
-		JPanel panel_12 = new JPanel();
-		panel_12.setBounds(465, 180, 85, 1);
-		panel_12.setBackground(Color.BLACK);
-		add(panel_12);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(195, 180, 167, 1);
-		panel_4.setBackground(new Color(0, 0, 0));
-		add(panel_4);
-		
-		JPanel panel_18 = new JPanel();
-		panel_18.setBounds(195, 230, 167, 1);
-		panel_18.setBackground(new Color(0, 0, 0));
-		add(panel_18);
-		
-		JPanel panel_19 = new JPanel();
-		panel_19.setBounds(195, 330, 167, 1);
-		panel_19.setBackground(new Color(0, 0, 0));
-		add(panel_19);
-		
-		JPanel panel_20 = new JPanel();
-		panel_20.setBounds(195, 280, 167, 1);
-		panel_20.setBackground(new Color(0, 0, 0));
-		add(panel_20);
-		
-		JPanel panel_21 = new JPanel();
-		panel_21.setBounds(276, 180, 2, 201);
-		panel_21.setBackground(new Color(0, 0, 0));
-		add(panel_21);
+		// -------------------- Painel filtro de vagas ----------------------------
 		
 		JPanel panelFiltro = new JPanel();
 		panelFiltro.setBounds(20, 54, 249, 79);
@@ -272,50 +271,6 @@ public class GraficoSetorA extends JPanel {
 		Aluno.setBounds(6, 58, 99, 14);
 		panelFiltro.add(Aluno);
 		Aluno.setSelected(true);
-		
-		JButton btnRemoverVagas = new JButton("Liberar vaga(s)");
-		btnRemoverVagas.setBounds(340, 110, 145, 23);
-		add(btnRemoverVagas);
-		
-		JButton btnAdcionarVagas = new JButton("Preencher vaga(s)");
-		btnAdcionarVagas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(getRootPane(), "Selecione as vagas que serão ocupadas", "Preenchimento de vagas", JOptionPane.INFORMATION_MESSAGE);
-				for (JCheckBox tipo : tipos) {
-					tipo.setEnabled(true);
-					tipo.setVisible(true);
-					tipo.setSelected(false);
-				}
-				btnAdcionarVagas.setVisible(false);
-				btnRemoverVagas.setVisible(false);
-				
-				JButton botaoPreencher = new JButton("Ok");
-				botaoPreencher.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						for(int i = 0 ; i <16 ; i++)
-						{
-							tipos[i].setEnabled(false);
-							tipos[i].setVisible(false);
-							
-							if(tipos[i].isSelected())
-							{
-								paineis[i].setBackground(Color.red);
-								setor.alterar_Disponibilidade_Vaga(false, i+1);
-							}
-							
-							preencheVagas();
-							botaoPreencher.setVisible(false);
-							btnAdcionarVagas.setVisible(true);
-							btnRemoverVagas.setVisible(true);
-						}
-					}
-				});
-				botaoPreencher.setBounds(340, 82, 145, 23);
-				add(botaoPreencher);
-			}
-		});
-		btnAdcionarVagas.setBounds(340, 54, 145, 23);
-		add(btnAdcionarVagas);
 		
 		JButton BotaoFiltrar = new JButton("Filtrar");
 		BotaoFiltrar.addActionListener(new ActionListener() {
@@ -350,6 +305,115 @@ public class GraficoSetorA extends JPanel {
 		BotaoFiltrar.setBounds(168, 40, 71, 23);
 		panelFiltro.add(BotaoFiltrar);
 		
+		// -------------------------- Menu de uso de vagas ---------------------------
+		
+		// Preencher
+		botaoPreencher.setBounds(340, 82, 145, 23);
+		add(botaoPreencher);
+		botaoPreencher.setVisible(false);
+		botaoPreencher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(int i = 0 ; i <16 ; i++)
+				{
+					tipos[i].setEnabled(false);
+					tipos[i].setVisible(false);
+					int [] ids = setor.idsVagas();
+					
+					if(tipos[i].isSelected() && setor.verifica_disponibilidade_vaga(ids[i]))
+					{
+						setor.alterar_Disponibilidade_Vaga(false, ids[i]);
+						tipos[i].setSelected(false);
+					}
+					else if(tipos[i].isSelected() && !setor.verifica_disponibilidade_vaga(ids[i]))
+					{
+						setor.alterar_Disponibilidade_Vaga(true, ids[i]);
+						tipos[i].setSelected(false);
+					}
+					
+					preencheVagas();
+					botaoPreencher.setVisible(false);
+					btnAdcionarVagas.setVisible(true);
+					btnRemoverVagas.setVisible(true);
+				}
+			}
+		});
+		
+		//Remover
+		btnRemoverVagas.setBounds(340, 110, 145, 23);
+		add(btnRemoverVagas);
+		btnRemoverVagas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int valida = 0;
+				int[] ids = setor.idsVagas();
+				for(int i = 0 ; i < 16 ; i++)
+				{
+					if(ids[i] != -1)
+					{
+						if(!setor.verifica_disponibilidade_vaga(ids[i]))
+						{
+							++valida;
+							tipos[i].setEnabled(true);
+							tipos[i].setVisible(true);
+							tipos[i].setSelected(false);
+						}
+						else
+						{
+							tipos[i].setVisible(false);
+						}
+					}
+					else
+					{
+						tipos[i].setVisible(false);
+					}
+				}
+				
+				if(valida != 0)
+				{
+					btnAdcionarVagas.setVisible(false);
+					btnRemoverVagas.setVisible(false);
+					botaoPreencher.setVisible(true);
+				}
+				else
+					JOptionPane.showMessageDialog(getRootPane(), "Não existem vagas para liberar", "Informe", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		
+		//Adicionar
+		btnAdcionarVagas.setBounds(340, 54, 145, 23);
+		add(btnAdcionarVagas);
+		btnAdcionarVagas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int valida = 0;
+				int[] ids = setor.idsVagas();
+				for(int i = 0 ; i < 16 ; i++)
+				{
+					if(ids[i] != -1 && setor.verifica_disponibilidade_vaga(ids[i]))
+					{
+						++valida;
+						tipos[i].setEnabled(true);
+						tipos[i].setVisible(true);
+						tipos[i].setSelected(false);
+					}
+					else
+					{
+						tipos[i].setVisible(false);
+					}
+				}
+				if(valida != 0)
+				{
+					btnAdcionarVagas.setVisible(false);
+					btnRemoverVagas.setVisible(false);
+					botaoPreencher.setVisible(true);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(getRootPane(), "Não existem vagas para preencher", "Informe", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+		
+		//----------------- Painel com nome do setor  ------------------
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.GRAY);
 		panel.setBounds(0, 0, 104, 37);
@@ -364,8 +428,7 @@ public class GraficoSetorA extends JPanel {
 		lblDisponibilidade.setBounds(157, 9, 104, 14);
 		add(lblDisponibilidade);
 		
-		
-		// Carregamento das vagas e progressbar
+		// ------------------- Carregamento das vagas e progressbar -----------
 		
 		progressBar.setStringPainted(true);
 		progressBar.setName("");

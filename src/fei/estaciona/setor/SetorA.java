@@ -17,7 +17,10 @@ public class SetorA implements Setor
 		Random r = new Random();
 		int randomInt;
 		
-		for (int i = 0 ; i < this.id_vagas.length ; ++i) 
+		for(int i = 0; i < 16 ; i ++)
+			this.id_vagas[i] = -1;
+		
+		for (int i = 0 ; i < 4 ; ++i) 
 		{
 			this.id_vagas[i] = -1;
 			randomInt = r.nextInt(3) + 1;
@@ -25,6 +28,7 @@ public class SetorA implements Setor
 		}
 	}
 	
+	@Override
 	public String[] tipoVagas()
 	{
 		String []vagas = new String[16];
@@ -42,16 +46,29 @@ public class SetorA implements Setor
 	}
 	
 	@Override
-	public boolean[] vagas_Disponiveis() 
+	public int[] idsVagas()
 	{
-		boolean []vagas = new boolean[16];
+		return this.id_vagas;
+	}
+	
+	@Override
+	public int[] vagas_Disponiveis()
+	{
+		int []vagas = new int[16];
 		for(int i = 0 ; i < 16 ; i++)
 		{
-			Vaga vaga= Setor.banco_de_vagas.buscaVaga(i+1);
-			if(vaga.verifica_disponibilidade())
-				vagas[i] = true;
+			if(this.id_vagas[i] != -1)
+			{
+				Vaga vaga= Setor.banco_de_vagas.buscaVaga(i+1);
+				if(vaga.verifica_disponibilidade())
+					vagas[i] = 1;
+				else
+					vagas[i] = 0;
+			}
 			else
-				vagas[i] = false;
+			{
+				vagas[i] = -1;
+			}
 		}
 		
 		return vagas;
@@ -86,7 +103,14 @@ public class SetorA implements Setor
 	}
 
 	@Override
-	public void inserir_Nova_Vaga(int tipoVaga)
+	public boolean verifica_disponibilidade_vaga(int id)
+	{
+		Vaga vaga= Setor.banco_de_vagas.buscaVaga(id);
+		return vaga.verifica_disponibilidade();
+	}
+	
+	@Override
+	public int inserir_Nova_Vaga(int tipoVaga)
 	{
 		if(Verifica_Disponibilidade_Setor() )
 		{
@@ -95,10 +119,11 @@ public class SetorA implements Setor
 				if(id_vagas[i] == -1)
 				{
 					int NovaVaga = Setor.banco_de_vagas.InsereVaga(tipoVaga);
-					System.out.println(NovaVaga);
 					this.id_vagas[i] = NovaVaga;
+					return 1;
 				}
 			}
 		}
+		return -1;
 	}
 }

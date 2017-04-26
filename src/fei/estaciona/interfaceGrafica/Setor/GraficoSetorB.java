@@ -29,14 +29,21 @@ public class GraficoSetorB extends JPanel {
 
 	public void preencheVagas()
 	{
-		boolean[] vagas = setor.vagas_Disponiveis();
+		int[] vagas = setor.vagas_Disponiveis();
 		int progress = 0;
 		for(int i = 0 ; i < 16 ; i++)
 		{
-			++progress;
-			if(false)
+			if(vagas[i] != -1)
 			{
-				paineis[i].setBackground(Color.green);
+				if(vagas[i] == 1)
+				{
+					++progress;
+					paineis[i].setBackground(Color.green);
+				}
+				else
+				{
+					paineis[i].setBackground(Color.red);
+				}
 			}
 		}
 		progress = (progress*100)/16;
