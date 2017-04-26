@@ -19,4 +19,5 @@ public interface Setor
 	boolean Verifica_Disponibilidade_Setor();
 	boolean verifica_disponibilidade_vaga(int id);
 	String[] tipoVagas();
+	int[] idsVagas();
 }

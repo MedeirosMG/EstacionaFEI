@@ -26,6 +26,12 @@ public class SetorD implements Setor
 	}
 	
 	@Override
+	public int[] idsVagas()
+	{
+		return this.id_vagas;
+	}
+	
+	@Override
 	public String[] tipoVagas()
 	{
 		String []vagas = new String[16];

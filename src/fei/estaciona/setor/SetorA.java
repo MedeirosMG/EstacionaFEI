@@ -1,5 +1,7 @@
 package fei.estaciona.setor;
 
+import java.util.Random;
+
 import fei.estaciona.vaga.Vaga;
 
 public class SetorA implements Setor
@@ -12,19 +14,18 @@ public class SetorA implements Setor
 	{
 		this.disponibilidade = true;
 		this.id_vagas = new int[MAX];
-		//Random r = new Random();
-		//int randomInt;
+		Random r = new Random();
+		int randomInt;
 		
 		for(int i = 0; i < 16 ; i ++)
 			this.id_vagas[i] = -1;
 		
-		/*
 		for (int i = 0 ; i < 4 ; ++i) 
 		{
 			this.id_vagas[i] = -1;
 			randomInt = r.nextInt(3) + 1;
 			inserir_Nova_Vaga(randomInt);
-		}*/
+		}
 	}
 	
 	@Override
@@ -42,6 +43,12 @@ public class SetorA implements Setor
 		}
 		
 		return vagas;
+	}
+	
+	@Override
+	public int[] idsVagas()
+	{
+		return this.id_vagas;
 	}
 	
 	@Override
@@ -113,7 +120,7 @@ public class SetorA implements Setor
 				{
 					int NovaVaga = Setor.banco_de_vagas.InsereVaga(tipoVaga);
 					this.id_vagas[i] = NovaVaga;
-					return NovaVaga;
+					return 1;
 				}
 			}
 		}

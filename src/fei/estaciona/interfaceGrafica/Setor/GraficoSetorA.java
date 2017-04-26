@@ -16,7 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import java.awt.event.ActionEvent;
 
 public class GraficoSetorA extends JPanel {
@@ -26,7 +25,6 @@ public class GraficoSetorA extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private SetorA setor = new SetorA();
-	private int[] ids = new int[16];
 	
 	private JPanel[] paineis = new JPanel[16];
 	private JPanel[] layout = new JPanel[30];
@@ -65,9 +63,6 @@ public class GraficoSetorA extends JPanel {
 	 */
 	public GraficoSetorA() {
 		
-		for(int i = 0; i < 16 ; i ++)
-			ids[i] = -1;
-		
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -75,15 +70,6 @@ public class GraficoSetorA extends JPanel {
 		setMaximumSize(new Dimension(32000, 32000));
 		setBackground(Color.LIGHT_GRAY);
 		setLayout(null);
-		
-		Random r = new Random();
-		int randomInt;
-		
-		for (int i = 0 ; i < 4 ; ++i) 
-		{
-			randomInt = r.nextInt(3) + 1;
-			ids[i] = setor.inserir_Nova_Vaga(randomInt);
-		}
 		
 		// ------------------ CRIACAO DAS VAGAS ---------------------- 
 		for(int i = 0 ; i< 16 ; i++)
@@ -331,6 +317,7 @@ public class GraficoSetorA extends JPanel {
 				{
 					tipos[i].setEnabled(false);
 					tipos[i].setVisible(false);
+					int [] ids = setor.idsVagas();
 					
 					if(tipos[i].isSelected() && setor.verifica_disponibilidade_vaga(ids[i]))
 					{
@@ -357,6 +344,7 @@ public class GraficoSetorA extends JPanel {
 		btnRemoverVagas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int valida = 0;
+				int[] ids = setor.idsVagas();
 				for(int i = 0 ; i < 16 ; i++)
 				{
 					if(ids[i] != -1)
@@ -396,6 +384,7 @@ public class GraficoSetorA extends JPanel {
 		btnAdcionarVagas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int valida = 0;
+				int[] ids = setor.idsVagas();
 				for(int i = 0 ; i < 16 ; i++)
 				{
 					if(ids[i] != -1 && setor.verifica_disponibilidade_vaga(ids[i]))
