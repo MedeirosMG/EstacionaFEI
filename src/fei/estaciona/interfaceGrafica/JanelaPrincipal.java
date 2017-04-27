@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.EditarSetor;
 import fei.estaciona.interfaceGrafica.Login.Login;
 import fei.estaciona.interfaceGrafica.Setor.GraficoSetorA;
 import fei.estaciona.interfaceGrafica.Setor.GraficoSetorB;
@@ -99,7 +100,7 @@ public class JanelaPrincipal extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 459);
-		setLayout(null);
+		getContentPane().setLayout(null);
 		
 		Login login = new Login();
 		
@@ -127,7 +128,15 @@ public class JanelaPrincipal extends JFrame {
 		});
 		mnSetorA.add(mntmVagasDisponiveis);
 		
-		JMenuItem mntmAdicionarVaga = new JMenuItem("Adicionar vaga");
+		JMenuItem mntmAdicionarVaga = new JMenuItem("Editar Setor A");
+		mntmAdicionarVaga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditarSetor edita = new EditarSetor();
+				getContentPane().add(edita);
+				edita.setVisible(true);
+				edita.setSize(getContentPane().getMaximumSize());
+			}
+		});
 		mnSetorA.add(mntmAdicionarVaga);
 		
 		JMenu mnSetorB = new JMenu("Setor B");
