@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,10 +13,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JRadioButton;
 import java.awt.Color;
 import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
-import javax.swing.SpinnerNumberModel;
 
 public class EditarSetor extends JPanel {
 
@@ -23,11 +20,14 @@ public class EditarSetor extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JPanel[] paineis = new JPanel[16];
+	private JPanel[] layout = new JPanel[30];
 
 	/**
 	 * Create the panel.
 	 */
-	public EditarSetor() {
+	public EditarSetor(String nomeEditar) {
+		
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -36,14 +36,117 @@ public class EditarSetor extends JPanel {
 		setBackground(java.awt.Color.LIGHT_GRAY);
 		setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(java.awt.Color.GRAY);
-		panel.setBounds(0, 0, 104, 37);
-		add(panel);
+		// ------------------ CRIACAO DAS VAGAS ---------------------- 
+		for(int i = 0 ; i< 16 ; i++)
+		{
+			paineis[i] = new JPanel();
+			paineis[i].setBackground(Color.LIGHT_GRAY);
+			paineis[i].setBorder(BorderFactory.createLineBorder(Color.darkGray, 1));  
+			add(paineis[i]);
+			switch(i)
+			{
+				case 0:
+					paineis[i].setBounds(10, 196, 49, 23);
+					break;
+				case 1:
+					paineis[i].setBounds(10, 246, 49, 23);
+					break;
+				case 2:
+					paineis[i].setBounds(10, 296, 49, 23);
+					break;
+				case 3:
+					paineis[i].setBounds(10, 347, 49, 23);
+					break;
+				case 4:
+					paineis[i].setBounds(217, 196, 49, 23);
+					break;
+				case 5:
+					paineis[i].setBounds(217, 246, 49, 23);
+					break;
+				case 6:
+					paineis[i].setBounds(217, 296, 49, 23);
+					break;
+				case 7:
+					paineis[i].setBounds(217, 347, 49, 23);
+					break;
+				case 8:
+					paineis[i].setBounds(288, 196, 49, 23);
+					break;
+				case 9:
+					paineis[i].setBounds(288, 246, 49, 23);
+					break;
+				case 10:
+					paineis[i].setBounds(288, 296, 49, 23);
+					break;
+				case 11:
+					paineis[i].setBounds(288, 347, 49, 23);
+					break;
+				case 12:
+					paineis[i].setBounds(491, 196, 49, 23);
+					break;
+				case 13:
+					paineis[i].setBounds(491, 246, 49, 23);
+					break;
+				case 14:
+					paineis[i].setBounds(491, 296, 49, 23);
+					break;
+				case 15:
+					paineis[i].setBounds(491, 347, 49, 23);
+					break;
+					
+			}
+		}
+
+		// ---------------------- Criação do layout -------------------------------
 		
-		JLabel lblSetorA = new JLabel("Setor A");
-		lblSetorA.setFont(new Font("Segoe Print", Font.PLAIN, 17));
-		panel.add(lblSetorA);
+		for(int i = 0 ; i< 13 ; i++)
+		{
+			layout[i] = new JPanel();
+			layout[i].setBackground(Color.BLACK);
+			add(layout[i]);
+			switch(i)
+			{
+				case 1:
+					layout[i].setBounds(0, 280, 85, 1);		
+					break;
+				case 2:
+					layout[i].setBounds(0, 230, 85, 1);
+					break;
+				case 3:
+					layout[i].setBounds(195, 180, 167, 1);
+					break;
+				case 4:
+					layout[i].setBounds(0, 330, 85, 1);
+					break;
+				case 5:
+					layout[i].setBounds(0, 180, 85, 1);
+					break;
+				case 6:
+					layout[i].setBounds(465, 330, 85, 1);
+					break;
+				case 7:
+					layout[i].setBounds(465, 280, 85, 1);
+					break;
+				case 8:
+					layout[i].setBounds(465, 230, 85, 1);
+					break;
+				case 9:
+					layout[i].setBounds(465, 180, 85, 1);
+					break;
+				case 10:
+					layout[i].setBounds(195, 230, 167, 1);
+					break;
+				case 11:
+					layout[i].setBounds(195, 330, 167, 1);
+					break;
+				case 12:
+					layout[i].setBounds(195, 280, 167, 1);
+					break;
+				case 13:
+					layout[i].setBounds(276, 180, 2, 201);
+					break;
+			}
+		}
 		
 		JLabel lblAdicionarVaga = new JLabel("Adicionar Vaga");
 		lblAdicionarVaga.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -79,22 +182,19 @@ public class EditarSetor extends JPanel {
 		
 		JButton btnInserirVaga = new JButton("Inserir Vaga");
 		btnInserirVaga.setFocusable(false);
-		btnInserirVaga.setBounds(207, 132, 173, 23);
+		btnInserirVaga.setBounds(207, 132, 109, 23);
 		add(btnInserirVaga);
 		
-		JLabel lblRemoverVaga = new JLabel("Remover Vaga");
-		lblRemoverVaga.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblRemoverVaga.setBounds(10, 192, 124, 25);
-		add(lblRemoverVaga);
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.GRAY);
+		panel.setForeground(Color.GRAY);
+		panel.setBounds(0, 0, 104, 37);
+		add(panel);
 		
-		JLabel lblQuantidadeAAdicionar = new JLabel("Quantidade a adicionar:");
-		lblQuantidadeAAdicionar.setBounds(207, 84, 145, 14);
-		add(lblQuantidadeAAdicionar);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(1, 1, 16, 1));
-		spinner.setBounds(351, 81, 29, 20);
-		add(spinner);
+		JLabel lblNewLabel = new JLabel(nomeEditar);
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Segoe Print", Font.PLAIN, 17));
+		panel.add(lblNewLabel);
 		
 	}
 }

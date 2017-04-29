@@ -4,13 +4,13 @@ import java.util.Random;
 
 import fei.estaciona.vaga.Vaga;
 
-public class SetorA implements Setor
+public class SetorFull implements Setor
 {
 
 	private int[] id_vagas;
 	private boolean disponibilidade;
 	
-	public SetorA()
+	public SetorFull()
 	{
 		this.disponibilidade = true;
 		this.id_vagas = new int[MAX];
@@ -59,7 +59,7 @@ public class SetorA implements Setor
 		{
 			if(this.id_vagas[i] != -1)
 			{
-				Vaga vaga= Setor.banco_de_vagas.buscaVaga(i+1);
+				Vaga vaga= Setor.banco_de_vagas.buscaVaga(id_vagas[i]);
 				if(vaga.verifica_disponibilidade())
 					vagas[i] = 1;
 				else

@@ -8,7 +8,7 @@ import javax.swing.JProgressBar;
 import java.awt.Component;
 import javax.swing.border.EmptyBorder;
 
-import fei.estaciona.setor.SetorA;
+import fei.estaciona.setor.SetorFull;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,13 +18,13 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class GraficoSetorA extends JPanel {
+public class GraficoSetor extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private SetorA setor = new SetorA();
+	private SetorFull setor = new SetorFull();
 	
 	private JPanel[] paineis = new JPanel[16];
 	private JPanel[] layout = new JPanel[30];
@@ -55,13 +55,15 @@ public class GraficoSetorA extends JPanel {
 				}
 			}
 		}
-		progress = (progress*100)/total;
+		if(progress != 0)
+			progress = (progress*100)/total;
+					
 		progressBar.setValue(progress);
 	}
 	/**
 	 * Create the panel.
 	 */
-	public GraficoSetorA() {
+	public GraficoSetor(String nomeSetor) {
 		
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setAlignmentY(Component.TOP_ALIGNMENT);
@@ -419,10 +421,10 @@ public class GraficoSetorA extends JPanel {
 		panel.setBounds(0, 0, 104, 37);
 		add(panel);
 		
-		JLabel lblSetorA = new JLabel("Setor A");
-		lblSetorA.setForeground(Color.WHITE);
-		lblSetorA.setFont(new Font("Segoe Print", Font.PLAIN, 17));
-		panel.add(lblSetorA);
+		JLabel lblSetor = new JLabel(nomeSetor);
+		lblSetor.setForeground(Color.WHITE);
+		lblSetor.setFont(new Font("Segoe Print", Font.PLAIN, 17));
+		panel.add(lblSetor);
 		
 		JLabel lblDisponibilidade = new JLabel("Disponibilidade :");
 		lblDisponibilidade.setBounds(157, 9, 104, 14);
