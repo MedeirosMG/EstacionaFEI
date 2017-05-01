@@ -26,7 +26,14 @@ public class JanelaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private GraficoSetor[] setores = new GraficoSetor[6];
-	private EditarSetor[] adicionarVaga = new EditarSetor[6];
+	private EditarSetor[] adicionar = new EditarSetor[6];
+	
+	private JMenuItem []VagasDisponiveis = new JMenuItem[6];
+	private JMenuItem []AdicionarVaga = new JMenuItem[6];
+	
+	private JMenu[] MenuSetores = new JMenu[6];
+	JMenuBar menuBar = new JMenuBar();
+	
 	Login login = new Login();
 
 	/**
@@ -48,13 +55,64 @@ public class JanelaPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	// ------------------------- Botões -------------------------------
+	
+	public class BotaoSetor implements ActionListener 
+	{
+		private int i;
+    	private BotaoSetor(int i)
+    	{
+    		this.i = i;
+    	}
+    	
+        public void actionPerformed(ActionEvent ev) {
+        	if(login.isVisible())
+			{
+				JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções ", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
+			}
+        	else
+        	{
+        		getContentPane().add(setores[i]);
+    			alteraVisibilidade(i+1,1);
+    			setores[i].setSize(getContentPane().getMaximumSize());
+        	}
+        }  
+	}
+	
+	public class BotaoAdicionar implements ActionListener
+	{
+		private int i;
+    	private BotaoAdicionar(int i)
+    	{
+    		this.i = i;
+    	}
+    	
+    	public void actionPerformed(ActionEvent ev) 
+    	{
+    		if(login.isVisible())
+			{
+				JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else
+			{
+				getContentPane().add(adicionar[i]);
+				alteraVisibilidade(i+1,2);
+				adicionar[i].setSize(getContentPane().getMaximumSize());
+			}
+    	}
+    	
+	}
+	
+	// ----------------------------------------------------------------------------
+	
 	public void alteraVisibilidade(int setor, int tipo)
 	{
 		for(int i = 0 ; i < 6 ; ++i)
 		{
 			if(tipo == 1)
 			{
-				adicionarVaga[i].setVisible(false);
+				adicionar[i].setVisible(false);
 				if(setor == i+1)
 				{
 					setores[i].setVisible(true);
@@ -68,14 +126,15 @@ public class JanelaPrincipal extends JFrame {
 				setores[i].setVisible(false);
 				if(setor == i+1)
 				{
-					adicionarVaga[i].setVisible(true);
-					adicionarVaga[i].updateUI();
+					adicionar[i].setVisible(true);
+					adicionar[i].updateUI();
 				}
 				else
-					adicionarVaga[i].setVisible(false);
+					adicionar[i].setVisible(false);
 			}
 		}
 	}
+	
 	public JanelaPrincipal()  {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -89,165 +148,39 @@ public class JanelaPrincipal extends JFrame {
 		
 		// --------------------- Criação dos botoes setores ---------------------
 		
-		for(int i = 0 ; i <6 ; ++i)
-		{
-			String[] nomes = {"Setor A", "Setor B", "Setor C", "Setor D", "Setor E", "Setor F"};
-			setores[i] = new GraficoSetor(nomes[i]);
-		}
 		
-		// ---------------------- Criação dos botoes adicionarVaga --------------------
-		
-		for(int i = 0 ; i <6 ; ++i)
-		{
-			String[] nomes = {"Setor A", "Setor B", "Setor C", "Setor D", "Setor E", "Setor F"};
-			adicionarVaga[i] = new EditarSetor(nomes[i]);
-		}
-		
-		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu MenuSetorA = new JMenu("Setor A");
-		menuBar.add(MenuSetorA);
-		
-		JMenuItem VagasDisponiveisA = new JMenuItem("Vagas disponiveis");
-		VagasDisponiveisA.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				if(login.isVisible())
-				{
-					JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
-					getContentPane().add(setores[0]);
-					alteraVisibilidade(1,1);
-					setores[0].setSize(getContentPane().getMaximumSize());
-				}
-			}
-		});
-		MenuSetorA.add(VagasDisponiveisA);
-		
-		JMenuItem AdicionarSetorA = new JMenuItem("Editar Setor A");
-		AdicionarSetorA.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(login.isVisible())
-				{
-					JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
-					getContentPane().add(adicionarVaga[0]);
-					alteraVisibilidade(1,2);
-					adicionarVaga[0].setSize(getContentPane().getMaximumSize());
-				}
-			}
-		});
-		MenuSetorA.add(AdicionarSetorA);
-		
-		JMenu MenuSetorB = new JMenu("Setor B");
-		menuBar.add(MenuSetorB);
-		
-		JMenuItem VagasDisponiveisB = new JMenuItem("Vagas disponiveis");
-		VagasDisponiveisB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(login.isVisible())
-				{
-					JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
-					getContentPane().add(setores[1]);
-					alteraVisibilidade(2,1);
-					setores[1].setSize(getContentPane().getMaximumSize());
-				}
-			}
-		});
-		MenuSetorB.add(VagasDisponiveisB);
-		
-		JMenu MenuSetorC = new JMenu("Setor C");
-		menuBar.add(MenuSetorC);
-		
-		JMenuItem VagasDisponiveisC = new JMenuItem("Vagas disponiveis");
-		VagasDisponiveisC.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(login.isVisible())
-				{
-					JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
-					getContentPane().add(setores[2]);
-					alteraVisibilidade(3,1);
-					setores[2].setSize(getContentPane().getMaximumSize());
-				}
-			}
-		});
-		MenuSetorC.add(VagasDisponiveisC);
-		
-		JMenu MenuSetorD = new JMenu("Setor D");
-		menuBar.add(MenuSetorD);
-		
-		JMenuItem VagasDisponiveisD = new JMenuItem("Vagas disponiveis");
-		VagasDisponiveisD.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(login.isVisible())
-				{
-					JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
-					getContentPane().add(setores[3]);
-					alteraVisibilidade(4,1);
-					setores[3].setSize(getContentPane().getMaximumSize());
-				}
-			}
-		});
-		MenuSetorD.add(VagasDisponiveisD);
-		
-		JMenu MenuSetorE = new JMenu("Setor E");
-		menuBar.add(MenuSetorE);
-		
-		JMenuItem VagasDisponiveisE = new JMenuItem("Vagas disponiveis");
-		VagasDisponiveisE.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(login.isVisible())
-				{
-					JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
-					getContentPane().add(setores[4]);
-					alteraVisibilidade(5,1);
-					setores[4].setSize(getContentPane().getMaximumSize());
-				}
-			}
-		});
-		MenuSetorE.add(VagasDisponiveisE);
-		
-		JMenu MenuSetorF = new JMenu("Setor F");
-		menuBar.add(MenuSetorF);
-		
-		JMenuItem VagasDisponiveisF = new JMenuItem("Vagas disponiveis");
-		VagasDisponiveisF.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(login.isVisible())
-				{
-					JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
-					getContentPane().add(setores[5]);
-					alteraVisibilidade(6,1);
-					setores[5].setSize(getContentPane().getMaximumSize());
-				}
-			}
-		});
-		MenuSetorF.add(VagasDisponiveisF);
+		for(int i = 0 ; i <6 ; ++i)
+		{
+			String[] nomes = {"Setor A", "Setor B", "Setor C", "Setor D", "Setor E", "Setor F"};
+			// Criação janelas setores
+			setores[i] = new GraficoSetor(nomes[i]);
+			
+			//Criação janelas editar setor
+			adicionar[i] = new EditarSetor(nomes[i]);
+			
+			//criação da menuBar
+			MenuSetores[i] = new JMenu(nomes[i]);			
+			menuBar.add(MenuSetores[i]);
+			
+			// Criação dos botoes "Vagas disponiveis"
+			VagasDisponiveis[i] = new JMenuItem("Vagas disponiveis");
+			VagasDisponiveis[i].addActionListener(new BotaoSetor(i));
+			
+			//Criação dos botoes "Adicionar vagas"
+			AdicionarVaga[i] = new JMenuItem("Editar " + nomes[i]);
+			AdicionarVaga[i].addActionListener(new BotaoAdicionar(i));
+			
+			// Preenchimento da menubar
+			MenuSetores[i].add(VagasDisponiveis[i]);
+			MenuSetores[i].add(AdicionarVaga[i]);
+		}
 		
 		//Criação da tela de login ao abrir o programa
-		//getContentPane().add(login);
-		//login.setVisible(true);
-		//login.setSize(getContentPane().getMaximumSize());
+		getContentPane().add(login);
+		login.setVisible(true);
+		login.setSize(getContentPane().getMaximumSize());
 	}
 }
 
