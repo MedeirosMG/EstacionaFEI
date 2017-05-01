@@ -106,11 +106,11 @@ public class JanelaPrincipal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnSetorA = new JMenu("Setor A");
-		menuBar.add(mnSetorA);
+		JMenu MenuSetorA = new JMenu("Setor A");
+		menuBar.add(MenuSetorA);
 		
-		JMenuItem mntmVagasDisponiveis = new JMenuItem("Vagas disponiveis");
-		mntmVagasDisponiveis.addActionListener(new ActionListener() {
+		JMenuItem VagasDisponiveisA = new JMenuItem("Vagas disponiveis");
+		VagasDisponiveisA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
 				if(login.isVisible())
@@ -125,10 +125,10 @@ public class JanelaPrincipal extends JFrame {
 				}
 			}
 		});
-		mnSetorA.add(mntmVagasDisponiveis);
+		MenuSetorA.add(VagasDisponiveisA);
 		
-		JMenuItem mntmAdicionarVaga = new JMenuItem("Editar Setor A");
-		mntmAdicionarVaga.addActionListener(new ActionListener() {
+		JMenuItem AdicionarSetorA = new JMenuItem("Editar Setor A");
+		AdicionarSetorA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(login.isVisible())
 				{
@@ -142,13 +142,13 @@ public class JanelaPrincipal extends JFrame {
 				}
 			}
 		});
-		mnSetorA.add(mntmAdicionarVaga);
+		MenuSetorA.add(AdicionarSetorA);
 		
-		JMenu mnSetorB = new JMenu("Setor B");
-		menuBar.add(mnSetorB);
+		JMenu MenuSetorB = new JMenu("Setor B");
+		menuBar.add(MenuSetorB);
 		
-		JMenuItem mntmVagasDisponiveis_1 = new JMenuItem("Vagas disponiveis");
-		mntmVagasDisponiveis_1.addActionListener(new ActionListener() {
+		JMenuItem VagasDisponiveisB = new JMenuItem("Vagas disponiveis");
+		VagasDisponiveisB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(login.isVisible())
 				{
@@ -162,13 +162,13 @@ public class JanelaPrincipal extends JFrame {
 				}
 			}
 		});
-		mnSetorB.add(mntmVagasDisponiveis_1);
+		MenuSetorB.add(VagasDisponiveisB);
 		
-		JMenu mnSetorC = new JMenu("Setor C");
-		menuBar.add(mnSetorC);
+		JMenu MenuSetorC = new JMenu("Setor C");
+		menuBar.add(MenuSetorC);
 		
-		JMenuItem mntmVagasDisponiveis_2 = new JMenuItem("Vagas disponiveis");
-		mntmVagasDisponiveis_2.addActionListener(new ActionListener() {
+		JMenuItem VagasDisponiveisC = new JMenuItem("Vagas disponiveis");
+		VagasDisponiveisC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(login.isVisible())
 				{
@@ -182,13 +182,13 @@ public class JanelaPrincipal extends JFrame {
 				}
 			}
 		});
-		mnSetorC.add(mntmVagasDisponiveis_2);
+		MenuSetorC.add(VagasDisponiveisC);
 		
-		JMenu mnSetorD = new JMenu("Setor D");
-		menuBar.add(mnSetorD);
+		JMenu MenuSetorD = new JMenu("Setor D");
+		menuBar.add(MenuSetorD);
 		
-		JMenuItem mntmVagasDisponiveis_3 = new JMenuItem("Vagas disponiveis");
-		mntmVagasDisponiveis_3.addActionListener(new ActionListener() {
+		JMenuItem VagasDisponiveisD = new JMenuItem("Vagas disponiveis");
+		VagasDisponiveisD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(login.isVisible())
 				{
@@ -202,13 +202,13 @@ public class JanelaPrincipal extends JFrame {
 				}
 			}
 		});
-		mnSetorD.add(mntmVagasDisponiveis_3);
+		MenuSetorD.add(VagasDisponiveisD);
 		
-		JMenu mnSetorE = new JMenu("Setor E");
-		menuBar.add(mnSetorE);
+		JMenu MenuSetorE = new JMenu("Setor E");
+		menuBar.add(MenuSetorE);
 		
-		JMenuItem mntmVagasDisponiveis_4 = new JMenuItem("Vagas disponiveis");
-		mntmVagasDisponiveis_4.addActionListener(new ActionListener() {
+		JMenuItem VagasDisponiveisE = new JMenuItem("Vagas disponiveis");
+		VagasDisponiveisE.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(login.isVisible())
 				{
@@ -222,13 +222,13 @@ public class JanelaPrincipal extends JFrame {
 				}
 			}
 		});
-		mnSetorE.add(mntmVagasDisponiveis_4);
+		MenuSetorE.add(VagasDisponiveisE);
 		
-		JMenu mnSetorF = new JMenu("Setor F");
-		menuBar.add(mnSetorF);
+		JMenu MenuSetorF = new JMenu("Setor F");
+		menuBar.add(MenuSetorF);
 		
-		JMenuItem mntmVagasDisponiveis_5 = new JMenuItem("Vagas disponiveis");
-		mntmVagasDisponiveis_5.addActionListener(new ActionListener() {
+		JMenuItem VagasDisponiveisF = new JMenuItem("Vagas disponiveis");
+		VagasDisponiveisF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(login.isVisible())
 				{
@@ -242,12 +242,12 @@ public class JanelaPrincipal extends JFrame {
 				}
 			}
 		});
-		mnSetorF.add(mntmVagasDisponiveis_5);
+		MenuSetorF.add(VagasDisponiveisF);
 		
 		//Criação da tela de login ao abrir o programa
-		getContentPane().add(login);
-		login.setVisible(true);
-		login.setSize(getContentPane().getMaximumSize());
+		//getContentPane().add(login);
+		//login.setVisible(true);
+		//login.setSize(getContentPane().getMaximumSize());
 	}
 }
 
