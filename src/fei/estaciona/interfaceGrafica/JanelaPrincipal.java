@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.EditarSetor;
 import fei.estaciona.interfaceGrafica.Login.Login;
 import fei.estaciona.interfaceGrafica.Setor.GraficoSetor;
+import fei.estaciona.setor.SetorFull;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -23,6 +24,8 @@ public class JanelaPrincipal extends JFrame {
 	/**
 	 * 
 	 */
+	private SetorFull[] setor = new SetorFull[6];
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private GraficoSetor[] setores = new GraficoSetor[6];
@@ -153,9 +156,10 @@ public class JanelaPrincipal extends JFrame {
 		
 		for(int i = 0 ; i <6 ; ++i)
 		{
+			setor[i] = new SetorFull();
 			String[] nomes = {"Setor A", "Setor B", "Setor C", "Setor D", "Setor E", "Setor F"};
 			// Criação janelas setores
-			setores[i] = new GraficoSetor(nomes[i]);
+			setores[i] = new GraficoSetor(nomes[i], setor[i]);
 			
 			//Criação janelas editar setor
 			adicionar[i] = new EditarSetor(nomes[i]);
