@@ -23,8 +23,8 @@ public class GraficoSetor extends JPanel {
 	/**
 	 * 
 	 */
+	private SetorFull setor;
 	private static final long serialVersionUID = 1L;
-	private SetorFull setor = new SetorFull();
 	
 	private JPanel[] paineis = new JPanel[16];
 	private JPanel[] layout = new JPanel[30];
@@ -63,8 +63,9 @@ public class GraficoSetor extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GraficoSetor(String nomeSetor) {
+	public GraficoSetor(String nomeSetor, SetorFull novoSetor) {
 		
+		this.setor = novoSetor;
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		setAlignmentX(Component.LEFT_ALIGNMENT);
