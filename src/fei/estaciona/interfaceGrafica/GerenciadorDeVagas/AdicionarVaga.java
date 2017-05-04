@@ -7,27 +7,51 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JRadioButton;
+
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
-public class EditarSetor extends JPanel {
+import fei.estaciona.setor.SetorFull;
+
+public class AdicionarVaga extends JPanel {
 
 	/**
 	 * 
 	 */
+	private SetorFull setor;
 	private static final long serialVersionUID = 1L;
 	private JPanel[] paineis = new JPanel[16];
 	private JPanel[] layout = new JPanel[30];
+	private JCheckBox[] tipos = new JCheckBox[16];
+	JButton botaoPreencher = new JButton("Ok");
 
 	/**
 	 * Create the panel.
 	 */
-	public EditarSetor(String nomeEditar) {
+	public void preencheVagas()
+	{
+		int[] vagas = setor.vagas_Disponiveis();
+		for(int i = 0 ; i < 16 ; i++)
+		{
+			if(vagas[i] != -1)
+			{
+				paineis[i].setBackground(Color.BLACK);
+			}
+		}
+	}
+	
+	public AdicionarVaga(String nomeEditar, SetorFull novoSetor) {
 		
+		this.setor = novoSetor;
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -35,13 +59,79 @@ public class EditarSetor extends JPanel {
 		setMaximumSize(new Dimension(32000, 32000));
 		setBackground(java.awt.Color.LIGHT_GRAY);
 		setLayout(null);
+		// ----------------- Criação dos checkbox -------------------
+		
+		for(int i = 0 ; i< 16 ; i++)
+		{
+			tipos[i] = new JCheckBox();
+			tipos[i].setBackground(Color.LIGHT_GRAY);
+			tipos[i].setEnabled(false);
+			tipos[i].setVisible(false);
+			add(tipos[i]);
+			switch(i)
+			{
+				case 0:
+					tipos[i].setBounds(63, 196, 22, 23);
+					break;
+				case 1:
+					tipos[i].setBounds(63, 246, 22, 23);
+					break;
+				case 2:
+					tipos[i].setBounds(63, 296, 22, 23);
+					break;
+				case 3:
+					tipos[i].setBounds(63, 347, 22, 23);
+					break;
+				case 4:
+					tipos[i].setBounds(195, 196, 22, 23);
+					break;
+				case 5:
+					tipos[i].setBounds(195, 246, 22, 23);
+					break;
+				case 6:
+					tipos[i].setBounds(195, 296, 22, 23);
+					break;
+				case 7:
+					tipos[i].setBounds(195, 347, 22, 23);
+					break;
+				case 8:
+					tipos[i].setBounds(340, 196, 22, 23);
+					break;
+				case 9:
+					tipos[i].setBounds(340, 246, 22, 23);
+					break;
+				case 10:
+					tipos[i].setBounds(340, 296, 22, 23);
+					break;
+				case 11:
+					tipos[i].setBounds(340, 347, 22, 23);
+					break;
+				case 12:
+					tipos[i].setBounds(465, 196, 22, 23);
+					break;
+				case 13:
+					tipos[i].setBounds(465, 246, 22, 23);
+					break;
+				case 14:
+					tipos[i].setBounds(465, 296, 22, 23);
+					break;
+				case 15:
+					tipos[i].setBounds(465, 347, 22, 23);
+					break;
+					
+			}
+		}
 		
 		// ------------------ CRIACAO DAS VAGAS ---------------------- 
 		for(int i = 0 ; i< 16 ; i++)
 		{
+			int[] ids = setor.idsVagas();
 			paineis[i] = new JPanel();
-			paineis[i].setBackground(Color.LIGHT_GRAY);
-			paineis[i].setBorder(BorderFactory.createLineBorder(Color.darkGray, 1));  
+			paineis[i].setBorder(BorderFactory.createLineBorder(Color.darkGray, 1));
+			if(ids[i] == -1)
+				paineis[i].setBackground(Color.LIGHT_GRAY);
+			else
+				paineis[i].setBackground(Color.green);
 			add(paineis[i]);
 			switch(i)
 			{
@@ -182,8 +272,79 @@ public class EditarSetor extends JPanel {
 		
 		JButton btnInserirVaga = new JButton("Inserir Vaga");
 		btnInserirVaga.setFocusable(false);
+		btnInserirVaga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rdbtnEstudante.isSelected() || rdbtnProfessor.isSelected() || rdbtnDeficiente.isSelected())
+				{
+					int valida = 0;
+					int[] ids = setor.idsVagas();
+					for(int i = 0 ; i <16 ; i++)
+					{
+						tipos[i].setSelected(false);
+						if(ids[i] == -1)
+						{
+							++valida;
+							tipos[i].setVisible(true);
+							tipos[i].setEnabled(true);
+						}
+						else
+						{
+							tipos[i].setVisible(false);
+						}
+					}
+					
+					if(valida != 0)
+					{
+						rdbtnEstudante.setEnabled(false);
+						rdbtnProfessor.setEnabled(false);
+						rdbtnDeficiente.setEnabled(false);
+						btnInserirVaga.setVisible(false);
+						botaoPreencher.setVisible(true);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(getRootPane(), "Não existem mais espaços para vagas", "Informe", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(getRootPane(), "Por favor selecione o tipo da vaga a adicionar", "Informe", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 		btnInserirVaga.setBounds(207, 132, 109, 23);
 		add(btnInserirVaga);
+		
+		botaoPreencher.setBounds(207, 132, 109, 23);
+		add(botaoPreencher);
+		botaoPreencher.setVisible(false);
+		botaoPreencher.setFocusable(false);
+		botaoPreencher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(int i = 0 ; i <16 ; i++)
+				{
+					tipos[i].setEnabled(false);
+					tipos[i].setVisible(false);
+					
+					if(tipos[i].isSelected() && rdbtnEstudante.isSelected())
+					{
+						setor.inserir_Nova_Vaga(1);
+					}
+					else if(tipos[i].isSelected() && rdbtnProfessor.isSelected())
+					{
+						setor.inserir_Nova_Vaga(2);
+					}
+					else if(tipos[i].isSelected() && rdbtnDeficiente.isSelected())
+					{
+						setor.inserir_Nova_Vaga(3);
+					}
+					
+					botaoPreencher.setVisible(false);
+					btnInserirVaga.setVisible(true);
+					preencheVagas();
+				}
+			}
+		});
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.GRAY);

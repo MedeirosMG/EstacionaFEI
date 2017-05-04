@@ -1,19 +1,25 @@
 package fei.estaciona.interfaceGrafica.Setor;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Cursor;
+
 import javax.swing.JProgressBar;
+
 import java.awt.Component;
+
 import javax.swing.border.EmptyBorder;
 
 import fei.estaciona.setor.SetorFull;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -79,6 +85,7 @@ public class GraficoSetor extends JPanel {
 		{
 			paineis[i] = new JPanel();
 			paineis[i].setBackground(Color.LIGHT_GRAY);
+			paineis[i].setBorder(BorderFactory.createLineBorder(Color.darkGray, 1));
 			add(paineis[i]);
 			switch(i)
 			{
@@ -282,30 +289,58 @@ public class GraficoSetor extends JPanel {
 				String []tipoVagasSeq = setor.tipoVagas();
 				
 				for (int i = 0 ; i < 16 ; i++) {
-					
-					tipos[i].setSelected(false);
+					int[] vagas = setor.vagas_Disponiveis();
+					paineis[i].setBackground(Color.LIGHT_GRAY);
 					if(tipoVagasSeq[i] != null)
 					{
 						if(tipoVagasSeq[i].equals("Aluno") && Aluno.isSelected())
 						{
-							tipos[i].setSelected(true);
-							tipos[i].setVisible(true);
+							if(vagas[i] != -1)
+							{
+								if(vagas[i] == 1)
+								{
+									paineis[i].setBackground(Color.green);
+								}
+								else
+								{
+									paineis[i].setBackground(Color.red);
+								}
+							}
 						}
 						else if(tipoVagasSeq[i].equals("Professor") && Professor.isSelected())
 						{
-							tipos[i].setSelected(true);
-							tipos[i].setVisible(true);
+							if(vagas[i] != -1)
+							{
+								if(vagas[i] == 1)
+								{
+									paineis[i].setBackground(Color.green);
+								}
+								else
+								{
+									paineis[i].setBackground(Color.red);
+								}
+							}
 						}
 						if(tipoVagasSeq[i].equals("Deficiente") && Deficiente.isSelected())
 						{
-							tipos[i].setSelected(true);
-							tipos[i].setVisible(true);
+							if(vagas[i] != -1)
+							{
+								if(vagas[i] == 1)
+								{
+									paineis[i].setBackground(Color.green);
+								}
+								else
+								{
+									paineis[i].setBackground(Color.red);
+								}
+							}
 						}
 					}
 				}
 			}
 		});
 		BotaoFiltrar.setBounds(168, 40, 71, 23);
+		BotaoFiltrar.setFocusable(false);
 		panelFiltro.add(BotaoFiltrar);
 		
 		// -------------------------- Menu de uso de vagas ---------------------------
@@ -350,6 +385,7 @@ public class GraficoSetor extends JPanel {
 				int[] ids = setor.idsVagas();
 				for(int i = 0 ; i < 16 ; i++)
 				{
+					tipos[i].setSelected(false);
 					if(ids[i] != -1)
 					{
 						if(!setor.verifica_disponibilidade_vaga(ids[i]))
@@ -390,6 +426,7 @@ public class GraficoSetor extends JPanel {
 				int[] ids = setor.idsVagas();
 				for(int i = 0 ; i < 16 ; i++)
 				{
+					tipos[i].setSelected(false);
 					if(ids[i] != -1 && setor.verifica_disponibilidade_vaga(ids[i]))
 					{
 						++valida;

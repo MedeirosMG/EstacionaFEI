@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.EditarSetor;
+import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.AdicionarVaga;
 import fei.estaciona.interfaceGrafica.Login.Login;
 import fei.estaciona.interfaceGrafica.Setor.GraficoSetor;
 import fei.estaciona.setor.SetorFull;
@@ -29,7 +29,7 @@ public class JanelaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private GraficoSetor[] setores = new GraficoSetor[6];
-	private EditarSetor[] adicionar = new EditarSetor[6];
+	private AdicionarVaga[] adicionar = new AdicionarVaga[6];
 	
 	private JMenuItem []VagasDisponiveis = new JMenuItem[6];
 	private JMenuItem []AdicionarVaga = new JMenuItem[6];
@@ -77,6 +77,7 @@ public class JanelaPrincipal extends JFrame {
         	else
         	{
         		getContentPane().add(setores[i]);
+        		setores[i].preencheVagas();
     			alteraVisibilidade(i+1,1);
     			setores[i].setSize(getContentPane().getMaximumSize());
         	}
@@ -100,6 +101,7 @@ public class JanelaPrincipal extends JFrame {
 			else
 			{
 				getContentPane().add(adicionar[i]);
+				adicionar[i].preencheVagas();
 				alteraVisibilidade(i+1,2);
 				adicionar[i].setSize(getContentPane().getMaximumSize());
 			}
@@ -162,7 +164,7 @@ public class JanelaPrincipal extends JFrame {
 			setores[i] = new GraficoSetor(nomes[i], setor[i]);
 			
 			//Criação janelas editar setor
-			adicionar[i] = new EditarSetor(nomes[i]);
+			adicionar[i] = new AdicionarVaga(nomes[i], setor[i]);
 			
 			//criação da menuBar
 			MenuSetores[i] = new JMenu(nomes[i]);			
@@ -173,7 +175,7 @@ public class JanelaPrincipal extends JFrame {
 			VagasDisponiveis[i].addActionListener(new BotaoSetor(i));
 			
 			//Criação dos botoes "Adicionar vagas"
-			AdicionarVaga[i] = new JMenuItem("Editar " + nomes[i]);
+			AdicionarVaga[i] = new JMenuItem("Adicionar vaga");
 			AdicionarVaga[i].addActionListener(new BotaoAdicionar(i));
 			
 			// Preenchimento da menubar
