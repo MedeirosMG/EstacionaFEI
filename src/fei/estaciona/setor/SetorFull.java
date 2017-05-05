@@ -1,7 +1,5 @@
 package fei.estaciona.setor;
 
-import java.util.Random;
-
 import fei.estaciona.vaga.Vaga;
 
 public class SetorFull implements Setor
@@ -10,22 +8,14 @@ public class SetorFull implements Setor
 	private int[] id_vagas;
 	private boolean disponibilidade;
 	
-	public SetorFull()
+	public SetorFull(int setor)
 	{
 		this.disponibilidade = true;
 		this.id_vagas = new int[MAX];
-		Random r = new Random();
-		int randomInt;
 		
 		for(int i = 0; i < 16 ; i ++)
 			this.id_vagas[i] = -1;
 		
-		for (int i = 0 ; i < 4 ; ++i) 
-		{
-			this.id_vagas[i] = -1;
-			randomInt = r.nextInt(3) + 1;
-			inserir_Nova_Vaga(randomInt);
-		}
 	}
 	
 	@Override
@@ -39,7 +29,7 @@ public class SetorFull implements Setor
 			{
 				vaga= Setor.banco_de_vagas.buscaVaga(id_vagas[i]);
 				vagas[i] = vaga.GetTipo();
-			}
+			}	
 		}
 		
 		return vagas;
@@ -110,18 +100,21 @@ public class SetorFull implements Setor
 	}
 	
 	@Override
-	public int inserir_Nova_Vaga(int tipoVaga)
+	public int inserir_Nova_Vaga(int tipoVaga, int id, int numSetor)
 	{
 		if(Verifica_Disponibilidade_Setor() )
 		{
-			for(int i = 0 ; i < id_vagas.length ; i++)
+			int vaga = (id-1) - numSetor;	
+			
+			if(id_vagas[vaga] == -1)
 			{
-				if(id_vagas[i] == -1)
-				{
-					int NovaVaga = Setor.banco_de_vagas.InsereVaga(tipoVaga);
-					this.id_vagas[i] = NovaVaga;
-					return 1;
+				Setor.banco_de_vagas.InsereVaga(tipoVaga, id);
+				this.id_vagas[vaga] = id;
+				System.out.println(numSetor);
+				for (int i : id_vagas) {
+					System.out.println(i);
 				}
+				return 1;
 			}
 		}
 		return -1;

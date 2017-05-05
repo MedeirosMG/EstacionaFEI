@@ -40,31 +40,81 @@ public class GraficoSetor extends JPanel {
 	JButton btnAdcionarVagas = new JButton("Preencher vaga(s)");
 	JButton btnRemoverVagas = new JButton("Liberar vaga(s)");
 	
+	JCheckBox Deficiente = new JCheckBox("Deficiente");
+	JCheckBox Aluno = new JCheckBox("Aluno");
+	JCheckBox Professor = new JCheckBox("Professor");
+	
 	public void preencheVagas()
 	{
 		int[] vagas = setor.vagas_Disponiveis();
+		
+		String []tipoVagasSeq = setor.tipoVagas();
 		int progress = 0;
 		int total = 0;
+		
 		for(int i = 0 ; i < 16 ; i++)
 		{
-			if(vagas[i] != -1)
+			paineis[i].setBackground(Color.LIGHT_GRAY);
+			
+			if(tipoVagasSeq[i] != null)
 			{
 				++total;
-				if(vagas[i] == 1)
+				if(tipoVagasSeq[i].equals("Aluno") && Aluno.isSelected())
 				{
-					++progress;
-					paineis[i].setBackground(Color.green);
+					if(vagas[i] != -1)
+					{
+						if(vagas[i] == 1)
+						{
+							++progress;
+							paineis[i].setBackground(Color.green);
+						}
+						else
+						{
+							paineis[i].setBackground(Color.red);
+						}
+					}
 				}
-				else
+				else if(tipoVagasSeq[i].equals("Professor") && Professor.isSelected())
 				{
-					paineis[i].setBackground(Color.red);
+					if(vagas[i] != -1)
+					{
+						if(vagas[i] == 1)
+						{
+							++progress;
+							paineis[i].setBackground(Color.green);
+						}
+						else
+						{
+							paineis[i].setBackground(Color.red);
+						}
+					}
+				}
+				if(tipoVagasSeq[i].equals("Deficiente") && Deficiente.isSelected())
+				{
+					if(vagas[i] != -1)
+					{
+						if(vagas[i] == 1)
+						{
+							++progress;
+							paineis[i].setBackground(Color.green);
+						}
+						else
+						{
+							paineis[i].setBackground(Color.red);
+						}
+					}
 				}
 			}
 		}
-		if(progress != 0)
+		
+		if(total != 0)
 			progress = (progress*100)/total;
 					
 		progressBar.setValue(progress);
+		
+		for (int i = 0 ; i < 16 ; i++) {
+			
+		}
 	}
 	/**
 	 * Create the panel.
@@ -267,76 +317,23 @@ public class GraficoSetor extends JPanel {
 		lblFiltrarVagasPor.setBounds(10, 11, 207, 14);
 		panelFiltro.add(lblFiltrarVagasPor);
 		
-		JCheckBox Deficiente = new JCheckBox("Deficiente");
 		Deficiente.setBounds(6, 28, 99, 14);
 		panelFiltro.add(Deficiente);
 		Deficiente.setSelected(true);
 		
-		JCheckBox Professor = new JCheckBox("Professor");
 		Professor.setBounds(6, 44, 99, 14);
 		panelFiltro.add(Professor);
 		Professor.setSelected(true);
 		
-		JCheckBox Aluno = new JCheckBox("Aluno");
 		Aluno.setBounds(6, 58, 99, 14);
 		panelFiltro.add(Aluno);
 		Aluno.setSelected(true);
 		
+		// ---------------- BOTAO FILTRAR -----------------------
 		JButton BotaoFiltrar = new JButton("Filtrar");
 		BotaoFiltrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				String []tipoVagasSeq = setor.tipoVagas();
-				
-				for (int i = 0 ; i < 16 ; i++) {
-					int[] vagas = setor.vagas_Disponiveis();
-					paineis[i].setBackground(Color.LIGHT_GRAY);
-					if(tipoVagasSeq[i] != null)
-					{
-						if(tipoVagasSeq[i].equals("Aluno") && Aluno.isSelected())
-						{
-							if(vagas[i] != -1)
-							{
-								if(vagas[i] == 1)
-								{
-									paineis[i].setBackground(Color.green);
-								}
-								else
-								{
-									paineis[i].setBackground(Color.red);
-								}
-							}
-						}
-						else if(tipoVagasSeq[i].equals("Professor") && Professor.isSelected())
-						{
-							if(vagas[i] != -1)
-							{
-								if(vagas[i] == 1)
-								{
-									paineis[i].setBackground(Color.green);
-								}
-								else
-								{
-									paineis[i].setBackground(Color.red);
-								}
-							}
-						}
-						if(tipoVagasSeq[i].equals("Deficiente") && Deficiente.isSelected())
-						{
-							if(vagas[i] != -1)
-							{
-								if(vagas[i] == 1)
-								{
-									paineis[i].setBackground(Color.green);
-								}
-								else
-								{
-									paineis[i].setBackground(Color.red);
-								}
-							}
-						}
-					}
-				}
+				preencheVagas();
 			}
 		});
 		BotaoFiltrar.setBounds(168, 40, 71, 23);
