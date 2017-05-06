@@ -27,6 +27,7 @@ public class AdicionarVaga extends JPanel {
 	/**
 	 * 
 	 */
+	private int numeroSetor;
 	private SetorFull setor;
 	private static final long serialVersionUID = 1L;
 	private JPanel[] paineis = new JPanel[16];
@@ -49,8 +50,13 @@ public class AdicionarVaga extends JPanel {
 		}
 	}
 	
-	public AdicionarVaga(String nomeEditar, SetorFull novoSetor) {
+	public AdicionarVaga(String nomeEditar, SetorFull novoSetor, int numSetor) {
 		
+		this.numeroSetor = 0;
+		for(int j = 0; j < numSetor ; j++)
+		{
+			this.numeroSetor += 16;
+		}
 		this.setor = novoSetor;
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setAlignmentY(Component.TOP_ALIGNMENT);
@@ -281,6 +287,7 @@ public class AdicionarVaga extends JPanel {
 					for(int i = 0 ; i <16 ; i++)
 					{
 						tipos[i].setSelected(false);
+						
 						if(ids[i] == -1)
 						{
 							++valida;
@@ -328,20 +335,23 @@ public class AdicionarVaga extends JPanel {
 					
 					if(tipos[i].isSelected() && rdbtnEstudante.isSelected())
 					{
-						setor.inserir_Nova_Vaga(1);
+						setor.inserir_Nova_Vaga(1, (i+1) + numeroSetor , numeroSetor);
 					}
 					else if(tipos[i].isSelected() && rdbtnProfessor.isSelected())
 					{
-						setor.inserir_Nova_Vaga(2);
+						setor.inserir_Nova_Vaga(2, (i+1) + numeroSetor, numeroSetor);
 					}
 					else if(tipos[i].isSelected() && rdbtnDeficiente.isSelected())
 					{
-						setor.inserir_Nova_Vaga(3);
+						setor.inserir_Nova_Vaga(3, (i+1) + numeroSetor, numeroSetor);
 					}
 					
 					botaoPreencher.setVisible(false);
 					btnInserirVaga.setVisible(true);
 					preencheVagas();
+					rdbtnEstudante.setEnabled(true);
+					rdbtnProfessor.setEnabled(true);
+					rdbtnDeficiente.setEnabled(true);
 				}
 			}
 		});

@@ -158,13 +158,14 @@ public class JanelaPrincipal extends JFrame {
 		
 		for(int i = 0 ; i <6 ; ++i)
 		{
-			setor[i] = new SetorFull();
 			String[] nomes = {"Setor A", "Setor B", "Setor C", "Setor D", "Setor E", "Setor F"};
+			
+			setor[i] = new SetorFull(i);
 			// Criação janelas setores
 			setores[i] = new GraficoSetor(nomes[i], setor[i]);
 			
 			//Criação janelas editar setor
-			adicionar[i] = new AdicionarVaga(nomes[i], setor[i]);
+			adicionar[i] = new AdicionarVaga(nomes[i], setor[i], i);
 			
 			//criação da menuBar
 			MenuSetores[i] = new JMenu(nomes[i]);			
