@@ -41,11 +41,16 @@ public class AdicionarVaga extends JPanel {
 	public void preencheVagas()
 	{
 		int[] vagas = setor.vagas_Disponiveis();
+		
 		for(int i = 0 ; i < 16 ; i++)
 		{
 			if(vagas[i] != -1)
 			{
-				paineis[i].setBackground(Color.BLACK);
+				paineis[i].setBackground(Color.CYAN);
+			}
+			else
+			{
+				paineis[i].setBackground(Color.LIGHT_GRAY);
 			}
 		}
 	}
@@ -198,7 +203,7 @@ public class AdicionarVaga extends JPanel {
 		for(int i = 0 ; i< 13 ; i++)
 		{
 			layout[i] = new JPanel();
-			layout[i].setBackground(Color.BLACK);
+			layout[i].setBackground(Color.black);
 			add(layout[i]);
 			switch(i)
 			{

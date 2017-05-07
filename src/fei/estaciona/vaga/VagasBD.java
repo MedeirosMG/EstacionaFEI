@@ -13,6 +13,11 @@ public class VagasBD
 		Vagas.put(id, NovaVaga);
 	}
 	
+	public void DeletarVaga(int id)
+	{
+		Vagas.remove(id);
+	}
+	
 	public Vaga buscaVaga(int id)
 	{
 		return Vagas.get(id);

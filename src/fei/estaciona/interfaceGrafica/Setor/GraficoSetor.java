@@ -111,10 +111,6 @@ public class GraficoSetor extends JPanel {
 			progress = (progress*100)/total;
 					
 		progressBar.setValue(progress);
-		
-		for (int i = 0 ; i < 16 ; i++) {
-			
-		}
 	}
 	/**
 	 * Create the panel.
