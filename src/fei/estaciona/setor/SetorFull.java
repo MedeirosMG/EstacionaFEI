@@ -100,7 +100,7 @@ public class SetorFull implements Setor
 	}
 	
 	@Override
-	public int inserir_Nova_Vaga(int tipoVaga, int id, int numSetor)
+	public boolean inserir_Nova_Vaga(int tipoVaga, int id, int numSetor)
 	{
 		if(Verifica_Disponibilidade_Setor() )
 		{
@@ -110,13 +110,24 @@ public class SetorFull implements Setor
 			{
 				Setor.banco_de_vagas.InsereVaga(tipoVaga, id);
 				this.id_vagas[vaga] = id;
-				System.out.println(numSetor);
-				for (int i : id_vagas) {
-					System.out.println(i);
-				}
-				return 1;
+				return true;
 			}
 		}
-		return -1;
+		return false;
+	}
+	
+	@Override
+	public boolean deletar_vaga(int id,int numSetor)
+	{
+		int vaga = (id-1) - numSetor;
+		
+		if(id_vagas[vaga] != -1)
+		{
+			Setor.banco_de_vagas.DeletarVaga(id);
+			this.id_vagas[vaga] = -1;
+			return true;
+		}
+		
+		return false;
 	}
 }

@@ -19,5 +19,6 @@ public interface Setor
 	boolean verifica_disponibilidade_vaga(int id);
 	String[] tipoVagas();
 	int[] idsVagas();
-	int inserir_Nova_Vaga(int tipoVaga, int id, int numSetor);
+	boolean inserir_Nova_Vaga(int tipoVaga, int id, int numSetor);
+	boolean deletar_vaga(int id, int numSetor);
 }
