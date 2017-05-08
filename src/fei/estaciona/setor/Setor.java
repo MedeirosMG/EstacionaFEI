@@ -7,7 +7,6 @@ import fei.estaciona.vaga.tipo.Tipo;
 
 public interface Setor 
 {	
-	static VagasBD banco_de_vagas = new VagasBD();
 	static Tipo tipos = new Tipo();
 	static int MAX = 16;
 	static Scanner leitor = new Scanner(System.in);
