@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import fei.estaciona.BD.ConectaBD;
 import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.AdicionarVaga;
 import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.DeletarVaga;
 import fei.estaciona.interfaceGrafica.Login.Login;
@@ -26,8 +27,8 @@ public class JanelaPrincipal extends JFrame {
 	/**
 	 * 
 	 */
-	private SetorFull[] setor = new SetorFull[6];
 	
+	private SetorFull[] setor = new SetorFull[6];
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private GraficoSetor[] setores = new GraficoSetor[6];
@@ -184,6 +185,7 @@ public class JanelaPrincipal extends JFrame {
 	}
 	
 	public JanelaPrincipal()  {
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

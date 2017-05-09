@@ -1,21 +1,38 @@
 package fei.estaciona.setor;
 
 import fei.estaciona.vaga.Vaga;
+import fei.estaciona.vaga.VagasBD;
 
 public class SetorFull implements Setor
 {
 
 	private int[] id_vagas;
 	private boolean disponibilidade;
+	int numeroSetor;
+	private VagasBD banco_de_vagas = new VagasBD();
 	
-	public SetorFull(int setor)
+	public SetorFull(int numSetor)
 	{
+		this.numeroSetor = 0;
+		for(int j = 0; j < numSetor ; j++)
+		{
+			this.numeroSetor += 16;
+		}
+		
 		this.disponibilidade = true;
 		this.id_vagas = new int[MAX];
 		
-		for(int i = 0; i < 16 ; i ++)
-			this.id_vagas[i] = -1;
-		
+		for(int i = 0 ; i < 16 ; i++)
+		{
+			if(banco_de_vagas.buscaVaga((i+1) + this.numeroSetor) != null )
+			{
+				this.id_vagas[i] = ( (i+1) + this.numeroSetor)  ;
+			}
+			else
+			{
+				this.id_vagas[i] = -1;
+			}
+		}
 	}
 	
 	@Override
@@ -27,7 +44,7 @@ public class SetorFull implements Setor
 		{
 			if(id_vagas[i] != -1)
 			{
-				vaga= Setor.banco_de_vagas.buscaVaga(id_vagas[i]);
+				vaga= banco_de_vagas.buscaVaga(id_vagas[i]);
 				vagas[i] = vaga.GetTipo();
 			}	
 		}
@@ -49,7 +66,7 @@ public class SetorFull implements Setor
 		{
 			if(this.id_vagas[i] != -1)
 			{
-				Vaga vaga= Setor.banco_de_vagas.buscaVaga(id_vagas[i]);
+				Vaga vaga= banco_de_vagas.buscaVaga(id_vagas[i]);
 				if(vaga.verifica_disponibilidade())
 					vagas[i] = 1;
 				else
@@ -85,7 +102,7 @@ public class SetorFull implements Setor
 			{
 				if(id == i)
 				{
-					Vaga vaga= Setor.banco_de_vagas.buscaVaga(id);
+					Vaga vaga= banco_de_vagas.buscaVaga(id);
 					vaga.setDisponibilidade(disponivel);
 				}
 			}
@@ -95,7 +112,7 @@ public class SetorFull implements Setor
 	@Override
 	public boolean verifica_disponibilidade_vaga(int id)
 	{
-		Vaga vaga= Setor.banco_de_vagas.buscaVaga(id);
+		Vaga vaga= banco_de_vagas.buscaVaga(id);
 		return vaga.verifica_disponibilidade();
 	}
 	
@@ -104,11 +121,11 @@ public class SetorFull implements Setor
 	{
 		if(Verifica_Disponibilidade_Setor() )
 		{
-			int vaga = (id-1) - numSetor;	
+			int vaga = (id-1) - numSetor;
 			
 			if(id_vagas[vaga] == -1)
 			{
-				Setor.banco_de_vagas.InsereVaga(tipoVaga, id);
+				banco_de_vagas.InsereVaga(tipoVaga, id);
 				this.id_vagas[vaga] = id;
 				return true;
 			}
@@ -123,7 +140,7 @@ public class SetorFull implements Setor
 		
 		if(id_vagas[vaga] != -1)
 		{
-			Setor.banco_de_vagas.DeletarVaga(id);
+			banco_de_vagas.DeletarVaga(id);
 			this.id_vagas[vaga] = -1;
 			return true;
 		}
