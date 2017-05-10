@@ -1,17 +1,15 @@
 package fei.estaciona.vaga;
-import fei.estaciona.vaga.tipo.*;
 
 public class Vaga
 {
 	private boolean disponibilidade;
 	private int tipo;
-	private Tipo tabela_tipo;
+	private static VagasBD bd = new VagasBD();
 	
 	public Vaga(int tipo_vaga)
 	{
 		this.disponibilidade = true;
 		this.tipo = tipo_vaga;
-		this.tabela_tipo = new Tipo();
 	}
 	
 	public void setDisponibilidade(boolean disponibilidade) 
@@ -26,6 +24,6 @@ public class Vaga
 	
 	public String GetTipo()
 	{
-		return this.tabela_tipo.VerificaTipo(this.tipo);
+		return bd.VerificaTipoVaga(tipo);
 	}
 }

@@ -6,20 +6,55 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.derby.tools.ij;
 
+
 public class ConectaBD {
-	public Statement stm;
-	public ResultSet rs;
-	public Connection conn = null;
+	private Statement stm;
+	private ResultSet rs = null;
+	private Connection conn = null;
 	
 	private static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private static String protocol = "jdbc:derby:";
-	
+    
+    public ConectaBD()
+    {
+    	conectar();
+		try
+		 {
+			this.stm = conn.createStatement();
+			this.stm.executeQuery("SELECT * FROM VAGA");
+		 }catch(SQLException sqle)
+		 {
+			 printSQLException(sqle);
+		     if  ( sqle.getErrorCode() == 30000)
+		     {
+		         System.out.println("Ill create the database.");
+				 if (createDB(conn))
+				 {
+					 System.out.println("Banco Criado");
+				     System.out.println("Populando Banco");
+				     if (populateDB(conn))
+					{
+						System.out.println("Banco populado");
+					}else
+					{
+						System.out.println("Banco nao pode ser populado");
+					}
+				 }else
+				 {
+					 System.out.println("Banco não pode ser criado");
+				 }
+				
+		     }
+		 }
+    }
+    
 	public static void printSQLException(SQLException e) {
         while (e != null)
         {
@@ -32,37 +67,38 @@ public class ConectaBD {
     }
 	
 	private static boolean createDB(Connection conn) {
-        FileInputStream fileStream = null;
-        try
-        {
-            fileStream = new FileInputStream("./scripts/create.sql");
-            int result = ij.runScript(conn, fileStream, "UTF-8", System.out, "UTF-8");
-            System.out.println("Result code is: " + result);
-            if (result == 0)
-            {
-                return true;
-            } else
-            {
-                return false;
-            }
-        } catch (FileNotFoundException e)
-        {
-            return false;
-        } catch (UnsupportedEncodingException e)
-        {
-            return false;
-        } finally
-        {
-            if (fileStream != null)
-            {
-                try
-                {
-                    fileStream.close();
-                } catch (IOException e)
-                {
-                }
-            }
-        }
+		FileInputStream fileStream = null;
+		try
+		{
+		    fileStream = new FileInputStream("./scripts/create.sql");
+		    int result = ij.runScript(conn, fileStream, "UTF-8", System.out, "UTF-8");
+		    System.out.println("Result code is: " + result);
+		    if (result == 0)
+		    {
+		    	return true;
+		    }else
+		    {
+		    	return false;
+		    }
+		}catch(FileNotFoundException e)
+		{
+			return false;
+		} catch (UnsupportedEncodingException e)
+		{
+			return false;
+		}finally
+		{
+			if (fileStream != null)
+			{
+				try
+				{
+					fileStream.close();
+				}catch (IOException e)
+				{
+					System.err.println("Error :   " + e.getMessage() );
+				}
+			}
+		}
     }
 	
 	 private static boolean populateDB(Connection conn) {
@@ -94,6 +130,7 @@ public class ConectaBD {
 	                    fileStream.close();
 	                } catch (IOException e)
 	                {
+	                	System.err.println("Error :   " + e.getMessage() );
 	                }
 	            }
 	        }
@@ -120,49 +157,97 @@ public class ConectaBD {
 	        }
 	    }
 	
-	public ResultSet select()
+	public ResultSet Select(String select)
 	{
-		Statement s = null;
-        ResultSet rs = null;
-		 try
+		try
 		 {
-			 s = conn.createStatement();
-			 rs = s.executeQuery("SELECT * FROM VAGA");
-            
+			this.stm = conn.createStatement();
+			this.rs = this.stm.executeQuery(select);
 		 }catch(SQLException sqle)
 		 {
+			 this.rs = null;
 			 printSQLException(sqle);
-	         if  ( sqle.getErrorCode() == 30000)
-	         {
-	             System.out.println("Ill create the database.");
-	             if (createDB(conn))
-	             {
-	                 System.out.println("Banco Criado");
-	                 System.out.println("Populando Banco");
-	                 if (populateDB(conn))
-	                 {
-	                	 System.out.println("Banco populado");
-	                 } else
-	                 {
-	                	 System.out.println("Banco nao pode ser populado");
-	                 }
-	             } else
-	             {
-	                 System.out.println("Banco não pode ser criado");
-	             }
-	
-	         }
 		 }
-		return rs; 
+		return this.rs;
+	}
+	
+	public ResultSet SelectTipo(int tipo)
+	{
+		try
+		 {
+			PreparedStatement ps = conn.prepareStatement(
+			"SELECT * FROM TIPO WHERE id_tipo = ?");
+			ps.setInt(1, tipo);
+			return ps.executeQuery();
+		 }catch(SQLException sqle)
+		 {
+			 this.rs = null;
+			 printSQLException(sqle);
+		 }
+		return this.rs;
+	}
+	
+	public boolean Delete(int id)
+	{
+		try
+		 {
+			PreparedStatement ps = conn.prepareStatement(
+			"DELETE FROM VAGA WHERE id_vaga = ?");
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			ps.close();
+			return true;
+		 }catch(SQLException sqle)
+		 {
+			 this.rs = null;
+			 printSQLException(sqle);
+			 return false;
+		 }
+	}	
+	
+	public boolean Insert(int id, int tipo)
+	{
+		try
+		 {
+			PreparedStatement ps = conn.prepareStatement(
+			"INSERT INTO VAGA VALUES(?,true,?)");
+			ps.setInt(1, id);
+			ps.setInt(2, tipo);
+			ps.executeUpdate();
+			ps.close();
+			return true;
+		 }catch(SQLException sqle)
+		 {
+			 this.rs = null;
+			 printSQLException(sqle);
+			 return false;
+		 }
+	}
+	
+	public boolean Update(boolean disponibilidade, int id)
+	{
+		try
+		 {
+			PreparedStatement ps = conn.prepareStatement(
+			"UPDATE VAGA SET disponibilidade = ? WHERE id_vaga = ?");
+			ps.setBoolean(1, disponibilidade);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+			ps.close();
+			return true;
+		 }catch(SQLException sqle)
+		 {
+			 this.rs = null;
+			 printSQLException(sqle);
+			 return false;
+		 }
 	}
 	 
-	public boolean conectar() {
+	private boolean conectar() {
         loadDriver();
- 
-        ResultSet rs = null;
-        try
+    	try
         {
-            String dbName = "BD"; // the name of the database
+            String dbName = "BD"; // Nome do DB
             // caso DB não exista, ele cria
             conn = DriverManager.getConnection(protocol + dbName + ";create=true");
             System.out.println("Connected to and created database " + dbName);
@@ -179,18 +264,15 @@ public class ConectaBD {
                     rs.close();
                     rs = null;
                 }
-            } catch (SQLException sqle)
+            }catch (SQLException sqle)
             {
                 printSQLException(sqle);
- 
             }
         }
         return true;
    }
 	
-	
-    public void desconectar(){
-       
+    private void desconectar(){
         if(conn != null){
         	try
             {
@@ -207,7 +289,6 @@ public class ConectaBD {
                 }
             }
         }
-       
     }
    
 }

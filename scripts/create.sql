@@ -6,7 +6,13 @@ CREATE TABLE SETOR
 
 CREATE TABLE VAGA
 (
-	id integer not null,
+	id_vaga integer not null,
 	disponibilidade boolean,
 	tipo integer not null
+);
+
+CREATE TABLE TIPO
+(
+	id_tipo integer not null,
+	tipo varchar(15)
 );

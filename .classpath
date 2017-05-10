@@ -3,25 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derby.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbytools.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derby.war"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyclient.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_cs.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_de_DE.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_es.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_fr.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_hu.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_it.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_ja_JP.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_ko_KR.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_pl.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_pt_BR.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_ru.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_zh_CN.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyLocale_zh_TW.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbynet.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyoptionaltools.jar"/>
-	<classpathentry kind="lib" path="BD-Libs/derbyrun.jar"/>
+	<classpathentry kind="lib" path="Libs/derby.jar"/>
+	<classpathentry kind="lib" path="Libs/derbyclient.jar"/>
+	<classpathentry kind="lib" path="Libs/derbytools.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
