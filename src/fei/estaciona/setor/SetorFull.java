@@ -9,7 +9,7 @@ public class SetorFull implements Setor
 	private int[] id_vagas;
 	private boolean disponibilidade;
 	int numeroSetor;
-	private VagasBD banco_de_vagas = new VagasBD();
+	private static VagasBD banco_de_vagas = new VagasBD();
 	
 	public SetorFull(int numSetor)
 	{
@@ -103,6 +103,7 @@ public class SetorFull implements Setor
 				if(id == i)
 				{
 					Vaga vaga= banco_de_vagas.buscaVaga(id);
+					banco_de_vagas.AlteraDisponibilidade(disponivel, id);
 					vaga.setDisponibilidade(disponivel);
 				}
 			}

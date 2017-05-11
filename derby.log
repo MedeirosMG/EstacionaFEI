@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Mon May 08 13:21:22 BRT 2017:
- Inicializando o Derby vers?o The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): inst?ncia a816c00e-015b-e8dd-8081-000002c14c78
-no diret?rio de banco de dados C:\Users\medei\workspace\EstacionaFEI\BD 
-
+Wed May 10 14:26:51 BRT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015b-f366-2acb-00000317b7c0 
+on database directory C:\Users\medei\workspace\EstacionaFEI\BD with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/medei/workspace/EstacionaFEI/Libs/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_131-b11
 user.dir=C:\Users\medei\workspace\EstacionaFEI
@@ -10,10 +10,4 @@ os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
-Carregador de classe do banco de dados iniciado - derby.database.classpath=''
-----------------------------------------------------------------
-Mon May 08 13:21:22 BRT 2017: Shutting down Derby engine
-----------------------------------------------------------------
-Mon May 08 13:21:22 BRT 2017:
-Encerrando a inst?ncia a816c00e-015b-e8dd-8081-000002c14c78
-----------------------------------------------------------------
+Database Class Loader started - derby.database.classpath=''

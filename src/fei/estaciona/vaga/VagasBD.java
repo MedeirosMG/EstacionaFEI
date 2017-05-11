@@ -10,38 +10,68 @@ import fei.estaciona.BD.ConectaBD;
 public class VagasBD
 {
 	private static Map<Integer, Vaga> Vagas = new HashMap<Integer, Vaga>();;
-	private ConectaBD BD = new ConectaBD();
+	private static ConectaBD BD = null;
 	
 	public VagasBD()
 	{
-		BD.conectar();
-		ResultSet rs = BD.select();
-		 try {
-			while (rs.next()){
-			     int id = rs.getInt(1);
-			     boolean disponibilidade = rs.getBoolean(2);
-			     int tipo = rs.getInt(3);
-			     
-			     Vaga NovaVaga = new Vaga(tipo);
-			     Vagas.put(id, NovaVaga);
-			     NovaVaga.setDisponibilidade(disponibilidade);
-			 }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(BD == null)
+		{
+			BD =  new ConectaBD();
+			ResultSet rs = BD.Select("SELECT * FROM VAGA");
+			if(rs != null)
+			{
+				try {
+					while (rs.next()){
+					     int id = rs.getInt(1);
+					     boolean disponibilidade = rs.getBoolean(2);
+					     int tipo = rs.getInt(3);
+					     
+					     Vaga NovaVaga = new Vaga(tipo);
+					     Vagas.put(id, NovaVaga);
+					     NovaVaga.setDisponibilidade(disponibilidade);
+					 }
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			}
 		}
-		 BD.desconectar();
 	}
 	
 	public void InsereVaga(int tipo, int id)
 	{
-		Vaga NovaVaga = new Vaga(tipo);
-		Vagas.put(id, NovaVaga);
+		if(BD.Insert(id, tipo) )
+		{
+			Vaga NovaVaga = new Vaga(tipo);		
+			Vagas.put(id, NovaVaga);	
+		}
 	}
 	
 	public void DeletarVaga(int id)
 	{
-		Vagas.remove(id);
+		if(BD.Delete(id))
+		{
+			Vagas.remove(id);
+		}
+	}
+	
+	public String VerificaTipoVaga(int tipo)
+	{
+		ResultSet rs = BD.SelectTipo(tipo);
+		try {
+			while (rs.next()){
+				return rs.getString(2);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	public void AlteraDisponibilidade(boolean disponibilidade, int id_vaga)
+	{
+		BD.Update(disponibilidade, id_vaga);
 	}
 	
 	public Vaga buscaVaga(int id)
@@ -49,3 +79,4 @@ public class VagasBD
 		return Vagas.get(id);
 	}
 }
+

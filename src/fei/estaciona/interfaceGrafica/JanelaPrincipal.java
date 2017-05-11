@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import fei.estaciona.BD.ConectaBD;
 import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.AdicionarVaga;
 import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.DeletarVaga;
 import fei.estaciona.interfaceGrafica.Login.Login;
