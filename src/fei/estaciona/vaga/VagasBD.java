@@ -1,5 +1,6 @@
 package fei.estaciona.vaga;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -17,7 +18,8 @@ public class VagasBD
 		if(BD == null)
 		{
 			BD =  new ConectaBD();
-			ResultSet rs = BD.Select("SELECT * FROM VAGA");
+			Connection conexao = BD.conectar();
+			ResultSet rs = BD.Select("SELECT * FROM VAGA",conexao);
 			if(rs != null)
 			{
 				try {
@@ -33,31 +35,40 @@ public class VagasBD
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}	
+				}
+				finally
+				{
+					BD.desconectar(conexao);
+				}
 			}
 		}
 	}
 	
 	public void InsereVaga(int tipo, int id)
 	{
-		if(BD.Insert(id, tipo) )
+		Connection conn = BD.conectar();
+		if(BD.Insert(id, tipo, conn) )
 		{
 			Vaga NovaVaga = new Vaga(tipo);		
 			Vagas.put(id, NovaVaga);	
 		}
+		BD.desconectar(conn);
 	}
 	
 	public void DeletarVaga(int id)
 	{
-		if(BD.Delete(id))
+		Connection conn = BD.conectar();
+		if(BD.Delete(id, conn))
 		{
 			Vagas.remove(id);
 		}
+		BD.desconectar(conn);
 	}
 	
 	public String VerificaTipoVaga(int tipo)
 	{
-		ResultSet rs = BD.SelectTipo(tipo);
+		Connection conn = BD.conectar();
+		ResultSet rs = BD.SelectTipo(tipo,conn);
 		try {
 			while (rs.next()){
 				return rs.getString(2);
@@ -66,12 +77,17 @@ public class VagasBD
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally{
+			BD.desconectar(conn);
+		}
 		return "";
 	}
 	
 	public void AlteraDisponibilidade(boolean disponibilidade, int id_vaga)
 	{
-		BD.Update(disponibilidade, id_vaga);
+		Connection conn = BD.conectar();
+		BD.Update(disponibilidade, id_vaga, conn);
+		BD.desconectar(conn);
 	}
 	
 	public Vaga buscaVaga(int id)

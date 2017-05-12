@@ -15,20 +15,21 @@ import org.apache.derby.tools.ij;
 
 
 public class ConectaBD {
-	private Statement stm;
-	private ResultSet rs = null;
-	private Connection conn = null;
-	
-	private static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private static String protocol = "jdbc:derby:";
     
     public ConectaBD()
     {
-    	conectar();
-		try
+    	criarBanco();
+    }
+    
+    private void criarBanco()
+    {
+    	Statement stm;
+    	Connection conn = conectar();
+    	try
 		 {
-			this.stm = conn.createStatement();
-			this.stm.executeQuery("SELECT * FROM VAGA");
+			stm = conn.createStatement();
+			stm.executeQuery("SELECT * FROM VAGA");
 		 }catch(SQLException sqle)
 		 {
 			 printSQLException(sqle);
@@ -53,6 +54,7 @@ public class ConectaBD {
 				
 		     }
 		 }
+    	desconectar(conn);
     }
     
 	public static void printSQLException(SQLException e) {
@@ -136,42 +138,25 @@ public class ConectaBD {
 	        }
 	    }
 	
-	 private static void loadDriver() {
-	        try
-	        {
-	            Class.forName(driver).newInstance();
-	            System.out.println("Loaded the appropriate driver");
-	        } catch (ClassNotFoundException cnfe)
-	        {
-	            System.err.println("\nUnable to load the JDBC driver " + driver);
-	            System.err.println("Please check your CLASSPATH.");
-	            cnfe.printStackTrace(System.err);
-	        } catch (InstantiationException ie)
-	        {
-	            System.err.println("\nUnable to instantiate the JDBC driver " + driver);
-	            ie.printStackTrace(System.err);
-	        } catch (IllegalAccessException iae)
-	        {
-	            System.err.println("\nNot allowed to access the JDBC driver " + driver);
-	            iae.printStackTrace(System.err);
-	        }
-	    }
-	
-	public ResultSet Select(String select)
+	public ResultSet Select(String select, Connection conn)
 	{
+		Statement stm;
+		ResultSet rs;
+		
 		try
 		 {
-			this.stm = conn.createStatement();
-			this.rs = this.stm.executeQuery(select);
+			stm = conn.createStatement();
+			rs = stm.executeQuery(select);
+			return rs;
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 		 }
-		return this.rs;
+		
+		return null;
 	}
 	
-	public ResultSet SelectTipo(int tipo)
+	public ResultSet SelectTipo(int tipo, Connection conn)
 	{
 		try
 		 {
@@ -179,15 +164,15 @@ public class ConectaBD {
 			"SELECT * FROM TIPO WHERE id_tipo = ?");
 			ps.setInt(1, tipo);
 			return ps.executeQuery();
+			
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 		 }
-		return this.rs;
+		return null;
 	}
 	
-	public boolean Delete(int id)
+	public boolean Delete(int id, Connection conn)
 	{
 		try
 		 {
@@ -199,13 +184,12 @@ public class ConectaBD {
 			return true;
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 			 return false;
 		 }
 	}	
 	
-	public boolean Insert(int id, int tipo)
+	public boolean Insert(int id, int tipo, Connection conn)
 	{
 		try
 		 {
@@ -218,13 +202,12 @@ public class ConectaBD {
 			return true;
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 			 return false;
 		 }
 	}
 	
-	public boolean Update(boolean disponibilidade, int id)
+	public boolean Update(boolean disponibilidade, int id, Connection conn)
 	{
 		try
 		 {
@@ -237,56 +220,49 @@ public class ConectaBD {
 			return true;
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 			 return false;
 		 }
 	}
 	 
-	private boolean conectar() {
-        loadDriver();
+	public Connection conectar() {
     	try
         {
             String dbName = "BD"; // Nome do DB
             // caso DB não exista, ele cria
-            conn = DriverManager.getConnection(protocol + dbName + ";create=true");
+            Connection conn = DriverManager.getConnection(protocol + dbName + ";create=true");
             System.out.println("Connected to and created database " + dbName);
+            return conn;
         }catch (SQLException sqle)
         {
             // Caso eu nao encontre o banco ou a tabela, eu os crio. Deve passar aqui somente na primeira execussao
             printSQLException(sqle);
-        }finally
-        {
-            try
-            {
-                if (rs != null)
-                {
-                    rs.close();
-                    rs = null;
-                }
-            }catch (SQLException sqle)
-            {
-                printSQLException(sqle);
-            }
         }
-        return true;
+        return null;
    }
 	
-    private void desconectar(){
+    public void desconectar(Connection conn){
         if(conn != null){
         	try
             {
-                DriverManager.getConnection("jdbc:derby:;shutdown=true");
+        		conn.close();
+        		if(conn.isClosed())
+        			System.out.println("Derby shut down normally");
             } catch (SQLException se)
             {
-                if (((se.getErrorCode() == 50000) && ("XJ015".equals(se.getSQLState()))))
-                {
-                    System.out.println("Derby shut down normally");
-                } else
-                {
-                    System.err.println("Derby did not shut down normally");
-                    printSQLException(se);
-                }
+                try {
+					if (conn.isClosed())
+					{
+					    System.out.println("Derby shut down normally");
+					} else
+					{
+					    System.err.println("Derby did not shut down normally");
+					    printSQLException(se);
+					}
+				} catch (SQLException sqle) {
+					// TODO Auto-generated catch block
+					printSQLException(sqle);
+				}
             }
         }
     }
