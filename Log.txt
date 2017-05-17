@@ -1,0 +1,171 @@
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | ----- SQLException -----
+2017-05-14 | 12:39:41.538 |   SQL State:  42X05
+2017-05-14 | 12:39:41.538 |   Error Code: 30000
+2017-05-14 | 12:39:41.538 |   Message:    Table/View 'VAGA' does not exist.
+2017-05-14 | 12:39:41.538 | Banco 'BD' n?o encontrado, criando novo banco 
+2017-05-14 | 12:39:41.538 | Result code is: 0
+2017-05-14 | 12:39:41.538 | Banco Criado
+2017-05-14 | 12:39:41.538 | Populando Banco
+2017-05-14 | 12:39:41.538 | Resulat code is: 0
+2017-05-14 | 12:39:41.538 | Banco populado
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.484 | Login realizado com sucesso !! 
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:39:41.538 | Abrindo conexao com o banco BD
+2017-05-14 | 12:39:41.538 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.796 | Login realizado com sucesso !! 
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:40:43.834 | Abrindo conexao com o banco BD
+2017-05-14 | 12:40:43.834 | Conexao fechada com sucesso
+2017-05-14 | 12:41:08.192 | Abrindo conexao com o banco BD
+2017-05-14 | 12:41:08.192 | Conexao fechada com sucesso
+2017-05-14 | 12:41:08.192 | Abrindo conexao com o banco BD
+2017-05-14 | 12:41:08.192 | Conexao fechada com sucesso
+2017-05-14 | 12:41:08.192 | Abrindo conexao com o banco BD
+2017-05-14 | 12:41:08.192 | Conexao fechada com sucesso
+2017-05-14 | 12:41:08.192 | Abrindo conexao com o banco BD
+2017-05-14 | 12:41:08.192 | Conexao fechada com sucesso
+2017-05-14 | 12:41:08.192 | Abrindo conexao com o banco BD
+2017-05-14 | 12:41:08.192 | Conexao fechada com sucesso
+2017-05-14 | 12:41:08.192 | Abrindo conexao com o banco BD
+2017-05-14 | 12:41:08.192 | Conexao fechada com sucesso
+2017-05-14 | 12:41:08.139 | Login realizado com sucesso !! 
+2017-05-14 | 12:41:08.192 | Abrindo conexao com o banco BD
+2017-05-14 | 12:41:08.192 | Conexao fechada com sucesso
+2017-05-14 | 12:41:08.192 | Abrindo conexao com o banco BD
+2017-05-14 | 12:41:08.192 | Conexao fechada com sucesso
+2017-05-14 | 12:41:08.192 | Abrindo conexao com o banco BD
+2017-05-14 | 12:41:08.192 | Conexao fechada com sucesso

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import fei.estaciona.Log.GeraLog;
 import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.AdicionarVaga;
 import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.DeletarVaga;
 import fei.estaciona.interfaceGrafica.Login.Login;
@@ -38,6 +39,7 @@ public class JanelaPrincipal extends JFrame {
 	private JMenuItem []VagasDisponiveis = new JMenuItem[6];
 	private JMenuItem []AdicionarVaga = new JMenuItem[6];
 	private JMenuItem []DeletarVaga = new JMenuItem[6];
+	private static GeraLog log = new GeraLog();
 	
 	private JMenu[] MenuSetores = new JMenu[6];
 	JMenuBar menuBar = new JMenuBar();
@@ -54,6 +56,7 @@ public class JanelaPrincipal extends JFrame {
 					JanelaPrincipal frame = new JanelaPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
+					log.escreveLog(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -77,6 +80,7 @@ public class JanelaPrincipal extends JFrame {
         public void actionPerformed(ActionEvent ev) {
         	if(login.isVisible())
 			{
+        		log.escreveLog("Login nao realizado, erro ao acessar setor");
 				JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções ", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
 			}
         	else
@@ -101,6 +105,7 @@ public class JanelaPrincipal extends JFrame {
     	{
     		if(login.isVisible())
 			{
+    			log.escreveLog("Login nao realizado, erro ao acessar setor");
 				JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else
@@ -126,6 +131,7 @@ public class JanelaPrincipal extends JFrame {
     	{
     		if(login.isVisible())
 			{
+    			log.escreveLog("Login nao realizado, erro ao acessar setor");
 				JOptionPane.showMessageDialog(getRootPane(), "Por favor realize o login antes de acessar as funções", "Login não localizado", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else

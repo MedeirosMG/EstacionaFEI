@@ -3,6 +3,7 @@ package fei.estaciona.interfaceGrafica.Login;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import fei.estaciona.Log.GeraLog;
 import fei.estaciona.login.LoginAdmin;
 
 import java.awt.Component;
@@ -23,6 +24,7 @@ public class Login extends JPanel {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private LoginAdmin credencial = new LoginAdmin();
+	private static GeraLog log = new GeraLog();
 
 	/**
 	 * Create the panel.
@@ -58,12 +60,14 @@ public class Login extends JPanel {
 				if(credencial.verificaLogin(textField.getText(), password))
 				{
 					setVisible(false);
+					log.escreveLog("Login realizado com sucesso !! ");
 					JOptionPane.showMessageDialog(getRootPane(), "Login realizado com sucesso, bem vindo", "Login", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else
 				{
 					textField.setText("");
 					passwordField.setText("");
+					log.escreveLog("Erro ao realizar login, possivelmente usuario ou senha errado");
 					JOptionPane.showMessageDialog(getRootPane(), "Por favor verifique o usuario informado", "Usuario errado", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}

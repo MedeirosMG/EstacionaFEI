@@ -12,6 +12,7 @@ import java.awt.Component;
 
 import javax.swing.border.EmptyBorder;
 
+import fei.estaciona.Log.GeraLog;
 import fei.estaciona.setor.SetorFull;
 
 import javax.swing.BorderFactory;
@@ -36,13 +37,14 @@ public class GraficoSetor extends JPanel {
 	private JPanel[] layout = new JPanel[30];
 	private JCheckBox[] tipos = new JCheckBox[16];
 	private JProgressBar progressBar = new JProgressBar();
-	JButton botaoPreencher = new JButton("Ok");
-	JButton btnAdcionarVagas = new JButton("Preencher vaga(s)");
-	JButton btnRemoverVagas = new JButton("Liberar vaga(s)");
+	private static GeraLog log = new GeraLog();
+	private JButton botaoPreencher = new JButton("Ok");
+	private JButton btnAdcionarVagas = new JButton("Preencher vaga(s)");
+	private JButton btnRemoverVagas = new JButton("Liberar vaga(s)");
 	
-	JCheckBox Deficiente = new JCheckBox("Deficiente");
-	JCheckBox Aluno = new JCheckBox("Aluno");
-	JCheckBox Professor = new JCheckBox("Professor");
+	private JCheckBox Deficiente = new JCheckBox("Deficiente");
+	private JCheckBox Aluno = new JCheckBox("Aluno");
+	private JCheckBox Professor = new JCheckBox("Professor");
 	
 	public void preencheVagas()
 	{
@@ -406,7 +408,10 @@ public class GraficoSetor extends JPanel {
 					botaoPreencher.setVisible(true);
 				}
 				else
+				{
 					JOptionPane.showMessageDialog(getRootPane(), "Não existem vagas para liberar", "Informe", JOptionPane.INFORMATION_MESSAGE);
+					log.escreveLog("ERROR --------------- Não existem vagas para liberar ");
+				}
 			}
 		});
 		
@@ -441,6 +446,7 @@ public class GraficoSetor extends JPanel {
 				else
 				{
 					JOptionPane.showMessageDialog(getRootPane(), "Não existem vagas para preencher", "Informe", JOptionPane.INFORMATION_MESSAGE);
+					log.escreveLog("ERROR --------------- Não existem vagas para preencher ");
 				}
 			}
 		});

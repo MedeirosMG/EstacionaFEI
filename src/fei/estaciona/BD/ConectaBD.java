@@ -13,55 +13,61 @@ import java.sql.Statement;
 
 import org.apache.derby.tools.ij;
 
+import fei.estaciona.Log.GeraLog;
+
 
 public class ConectaBD {
-	private Statement stm;
-	private ResultSet rs = null;
-	private Connection conn = null;
-	
-	private static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private static String protocol = "jdbc:derby:";
+    private static GeraLog log = new GeraLog();
     
     public ConectaBD()
     {
-    	conectar();
-		try
+    	criarBanco();
+    }
+    
+    private void criarBanco()
+    {
+    	Statement stm;
+    	Connection conn = conectar();
+    	
+    	try
 		 {
-			this.stm = conn.createStatement();
-			this.stm.executeQuery("SELECT * FROM VAGA");
+			stm = conn.createStatement();
+			stm.executeQuery("SELECT * FROM VAGA");
 		 }catch(SQLException sqle)
 		 {
 			 printSQLException(sqle);
 		     if  ( sqle.getErrorCode() == 30000)
 		     {
-		         System.out.println("Ill create the database.");
+		         log.escreveLog("Banco 'BD' não encontrado, criando novo banco ");
 				 if (createDB(conn))
 				 {
-					 System.out.println("Banco Criado");
-				     System.out.println("Populando Banco");
-				     if (populateDB(conn))
+					 log.escreveLog("Banco Criado");
+					 log.escreveLog("Populando Banco");
+				    if (populateDB(conn))
 					{
-						System.out.println("Banco populado");
+				    	log.escreveLog("Banco populado");
 					}else
 					{
-						System.out.println("Banco nao pode ser populado");
+				    	log.escreveLog("Banco nao pode ser populado");
 					}
 				 }else
 				 {
-					 System.out.println("Banco não pode ser criado");
+					 log.escreveLog("Banco não pode ser criado");
 				 }
 				
 		     }
 		 }
+    	desconectar(conn);
     }
     
 	public static void printSQLException(SQLException e) {
         while (e != null)
         {
-            System.err.println("\n----- SQLException -----");
-            System.err.println("  SQL State:  " + e.getSQLState());
-            System.err.println("  Error Code: " + e.getErrorCode());
-            System.err.println("  Message:    " + e.getMessage());
+        	log.escreveLog("----- SQLException -----");
+        	log.escreveLog("  SQL State:  " + e.getSQLState());
+        	log.escreveLog("  Error Code: " + e.getErrorCode());
+        	log.escreveLog("  Message:    " + e.getMessage());
             e = e.getNextException();
         }
     }
@@ -71,8 +77,9 @@ public class ConectaBD {
 		try
 		{
 		    fileStream = new FileInputStream("./scripts/create.sql");
-		    int result = ij.runScript(conn, fileStream, "UTF-8", System.out, "UTF-8");
-		    System.out.println("Result code is: " + result);
+		    int result = ij.runScript(conn, fileStream, "UTF-8" ,System.out, "UTF-8");
+		    
+		    log.escreveLog("Result code is: " + result);
 		    if (result == 0)
 		    {
 		    	return true;
@@ -95,7 +102,7 @@ public class ConectaBD {
 					fileStream.close();
 				}catch (IOException e)
 				{
-					System.err.println("Error :   " + e.getMessage() );
+					log.escreveLog("Error :   " + e.getMessage() );
 				}
 			}
 		}
@@ -106,8 +113,9 @@ public class ConectaBD {
 	        try
 	        {
 	            fileStream = new FileInputStream("./scripts/populate.sql");
-	            int result = ij.runScript(conn, fileStream, "UTF-8", System.out, "UTF-8");
-	            System.out.println("Result code is: " + result);
+	            int result = ij.runScript(conn, fileStream, "UTF-8", System.out , "UTF-8");
+	           
+	            log.escreveLog("Resulat code is: " + result);
 	            if (result == 0)
 	            {
 	                return true;
@@ -130,48 +138,31 @@ public class ConectaBD {
 	                    fileStream.close();
 	                } catch (IOException e)
 	                {
-	                	System.err.println("Error :   " + e.getMessage() );
+	                	log.escreveLog("Error :   " + e.getMessage() );
 	                }
 	            }
 	        }
 	    }
 	
-	 private static void loadDriver() {
-	        try
-	        {
-	            Class.forName(driver).newInstance();
-	            System.out.println("Loaded the appropriate driver");
-	        } catch (ClassNotFoundException cnfe)
-	        {
-	            System.err.println("\nUnable to load the JDBC driver " + driver);
-	            System.err.println("Please check your CLASSPATH.");
-	            cnfe.printStackTrace(System.err);
-	        } catch (InstantiationException ie)
-	        {
-	            System.err.println("\nUnable to instantiate the JDBC driver " + driver);
-	            ie.printStackTrace(System.err);
-	        } catch (IllegalAccessException iae)
-	        {
-	            System.err.println("\nNot allowed to access the JDBC driver " + driver);
-	            iae.printStackTrace(System.err);
-	        }
-	    }
-	
-	public ResultSet Select(String select)
+	public ResultSet Select(String select, Connection conn)
 	{
+		Statement stm;
+		ResultSet rs;
+		
 		try
 		 {
-			this.stm = conn.createStatement();
-			this.rs = this.stm.executeQuery(select);
+			stm = conn.createStatement();
+			rs = stm.executeQuery(select);
+			return rs;
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 		 }
-		return this.rs;
+		
+		return null;
 	}
 	
-	public ResultSet SelectTipo(int tipo)
+	public ResultSet SelectTipo(int tipo, Connection conn)
 	{
 		try
 		 {
@@ -179,15 +170,15 @@ public class ConectaBD {
 			"SELECT * FROM TIPO WHERE id_tipo = ?");
 			ps.setInt(1, tipo);
 			return ps.executeQuery();
+			
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 		 }
-		return this.rs;
+		return null;
 	}
 	
-	public boolean Delete(int id)
+	public boolean Delete(int id, Connection conn)
 	{
 		try
 		 {
@@ -199,13 +190,12 @@ public class ConectaBD {
 			return true;
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 			 return false;
 		 }
 	}	
 	
-	public boolean Insert(int id, int tipo)
+	public boolean Insert(int id, int tipo, Connection conn)
 	{
 		try
 		 {
@@ -218,13 +208,12 @@ public class ConectaBD {
 			return true;
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 			 return false;
 		 }
 	}
 	
-	public boolean Update(boolean disponibilidade, int id)
+	public boolean Update(boolean disponibilidade, int id, Connection conn)
 	{
 		try
 		 {
@@ -237,56 +226,49 @@ public class ConectaBD {
 			return true;
 		 }catch(SQLException sqle)
 		 {
-			 this.rs = null;
 			 printSQLException(sqle);
 			 return false;
 		 }
 	}
 	 
-	private boolean conectar() {
-        loadDriver();
+	public Connection conectar() {
     	try
         {
             String dbName = "BD"; // Nome do DB
             // caso DB não exista, ele cria
-            conn = DriverManager.getConnection(protocol + dbName + ";create=true");
-            System.out.println("Connected to and created database " + dbName);
+            Connection conn = DriverManager.getConnection(protocol + dbName + ";create=true");
+            log.escreveLog("Abrindo conexao com o banco " + dbName);
+            return conn;
         }catch (SQLException sqle)
         {
             // Caso eu nao encontre o banco ou a tabela, eu os crio. Deve passar aqui somente na primeira execussao
             printSQLException(sqle);
-        }finally
-        {
-            try
-            {
-                if (rs != null)
-                {
-                    rs.close();
-                    rs = null;
-                }
-            }catch (SQLException sqle)
-            {
-                printSQLException(sqle);
-            }
         }
-        return true;
+        return null;
    }
 	
-    private void desconectar(){
+    public void desconectar(Connection conn){
         if(conn != null){
         	try
             {
-                DriverManager.getConnection("jdbc:derby:;shutdown=true");
+        		conn.close();
+        		if(conn.isClosed())
+        			log.escreveLog("Conexao fechada com sucesso");
             } catch (SQLException se)
             {
-                if (((se.getErrorCode() == 50000) && ("XJ015".equals(se.getSQLState()))))
-                {
-                    System.out.println("Derby shut down normally");
-                } else
-                {
-                    System.err.println("Derby did not shut down normally");
-                    printSQLException(se);
-                }
+                try {
+					if (conn.isClosed())
+					{
+						log.escreveLog("Conexao fechada com sucesso");
+					} else
+					{
+						log.escreveLog("Ocorreu um erro ao fechar a conexao : " + se.getMessage());
+					    printSQLException(se);
+					}
+				} catch (SQLException sqle) {
+					// TODO Auto-generated catch block
+					printSQLException(sqle);
+				}
             }
         }
     }
