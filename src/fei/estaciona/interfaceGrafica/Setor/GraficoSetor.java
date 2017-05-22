@@ -13,7 +13,10 @@ import java.awt.Component;
 import javax.swing.border.EmptyBorder;
 
 import fei.estaciona.Log.GeraLog;
+import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.AdicionarVaga;
+import fei.estaciona.interfaceGrafica.GerenciadorDeVagas.DeletarVaga;
 import fei.estaciona.setor.SetorFull;
+import fei.estaciona.simula.Simulacao;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -45,6 +48,13 @@ public class GraficoSetor extends JPanel {
 	private JCheckBox Deficiente = new JCheckBox("Deficiente");
 	private JCheckBox Aluno = new JCheckBox("Aluno");
 	private JCheckBox Professor = new JCheckBox("Professor");
+	
+	private Simulacao simula;
+	private Thread simulacao;
+	
+	public void rodaSimulacao(){
+		simulacao.start();
+	}
 	
 	public void preencheVagas()
 	{
@@ -118,6 +128,9 @@ public class GraficoSetor extends JPanel {
 	 * Create the panel.
 	 */
 	public GraficoSetor(String nomeSetor, SetorFull novoSetor) {
+		
+		simula = new Simulacao(novoSetor, this);
+		simulacao = new Thread(simula);
 		
 		this.setor = novoSetor;
 		setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -339,7 +352,7 @@ public class GraficoSetor extends JPanel {
 		panelFiltro.add(BotaoFiltrar);
 		
 		// -------------------------- Menu de uso de vagas ---------------------------
-		
+		/*
 		// Preencher
 		botaoPreencher.setBounds(340, 82, 145, 23);
 		add(botaoPreencher);
@@ -450,7 +463,7 @@ public class GraficoSetor extends JPanel {
 				}
 			}
 		});
-		
+		*/
 		//----------------- Painel com nome do setor  ------------------
 		
 		JPanel panel = new JPanel();

@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Sun May 14 12:41:08 BRT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015c-079e-d3ee-0000030f5768 
-on database directory C:\Users\medei\workspace\EstacionaFEI\BD with class loader sun.misc.Launcher$AppClassLoader@28d93b30 
-Loaded from file:/C:/Users/medei/workspace/EstacionaFEI/EstacionaFEI.jar
+Mon May 22 13:45:35 BRT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015c-310c-b67d-00000e4d7b30 
+on database directory C:\Users\Medei\Workspace\EstacionaFEI\BD with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/Medei/Workspace/EstacionaFEI/Libs/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_131-b11
-user.dir=C:\Users\medei\workspace\EstacionaFEI
+user.dir=C:\Users\Medei\Workspace\EstacionaFEI
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

@@ -190,8 +190,7 @@ public class JanelaPrincipal extends JFrame {
 		}
 	}
 	
-	public JanelaPrincipal()  {
-		
+	public JanelaPrincipal()  {		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -212,12 +211,13 @@ public class JanelaPrincipal extends JFrame {
 			String[] nomes = {"Setor A", "Setor B", "Setor C", "Setor D", "Setor E", "Setor F"};
 			
 			setor[i] = new SetorFull(i);
-			// Criação janelas setores
-			setores[i] = new GraficoSetor(nomes[i], setor[i]);
 			
 			//Criação janelas editar setor
 			adicionar[i] = new AdicionarVaga(nomes[i], setor[i], i);
 			deletar[i] = new DeletarVaga(nomes[i], setor[i], i);
+			
+			// Criação janelas setores
+			setores[i] = new GraficoSetor(nomes[i], setor[i]);
 			
 			//criação da menuBar
 			MenuSetores[i] = new JMenu(nomes[i]);			
@@ -239,6 +239,9 @@ public class JanelaPrincipal extends JFrame {
 			MenuSetores[i].add(VagasDisponiveis[i]);
 			MenuSetores[i].add(AdicionarVaga[i]);
 			MenuSetores[i].add(DeletarVaga[i]);
+			
+			// Roteiro de testes
+			setores[i].rodaSimulacao();
 		}
 		
 		//Criação da tela de login ao abrir o programa
